@@ -1,0 +1,160 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[% PROCESS helpheader.html %]
+
+<style type="text/css">
+<!--
+h1 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:large;
+}
+p {
+	font-size:1.2em;
+}
+li {
+	font-size:1.2em;
+	padding:0em 0em 0em 2.8em;
+	text-indent: -1em;
+}
+.indented
+   {
+   padding-left: 1.5em;
+   }
+DIV.bigcode {
+	width: 1200px;
+	padding:1em;
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+
+DIV.smallcode {
+	width: 1200px;
+	padding: 1em;
+	/* margin-left:2.8em; */
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+
+-->
+</style>
+
+<script language=javascript>
+function selectNode (node)
+{
+var selection, range, doc, win;
+
+if ((doc = node.ownerDocument) && (win = doc.defaultView) && typeof
+win.getSelection != 'undefined' && typeof doc.createRange !=
+'undefined' && (selection = window.getSelection()) && typeof
+selection.removeAllRanges != 'undefined')
+{
+range = doc.createRange();
+range.selectNode(node);
+selection.removeAllRanges();
+selection.addRange(range);
+}
+else if (document.body && typeof document.body.createTextRange !=
+'undefined' && (range = document.body.createTextRange()))
+{
+range.moveToElementText(node);
+range.select();
+}
+
+}
+
+
+function clearSelection ()
+{
+if (document.selection)
+document.selection.empty();
+else if (window.getSelection)
+window.getSelection().removeAllRanges();
+}
+</script>
+
+
+<div style="width:80%; margin-left:10%;">
+<p>&nbsp;</p>
+<h3>SrvrPowerCtrl plugin Unix/Linux setup instructions for [% distro %]</h3>
+<p><a href="http://code.google.com/p/srvrpowerctrl/" target="_blank"><img src="images/icon.png" alt="SrvrPowerCtrl" width="84" height="84" hspace="10" align="left" /></a>SrvrPowerCtrl's job is to help you control power states (sleeping / waking / etc.) on your [% sbsservername %] hardware.  To do that, SrvrPowerCtrl needs to be able use some &ldquo;helper&rdquo; applications on your server.  These applications differ according to which operating system you are using on the [% sbsservername %] hardware.  But whatever your server setup, you'll need to do a certain amount of manual tweaking of those helper applications <u>and</u> SrvrPowerCtrl's settings in order to get things working as they ought.  Hopefully, these instructions will help you get everything set &ldquo;just right.&rdquo;</p><br><hr /><br>
+
+[% warning %]
+
+<p>To finish installing SrvrPowerCtrl for Linux distros, you'll need to make sure that the following command is available from a terminal prompt:<p>
+<div class="bigcode">sudo&nbsp;shutdown -k -h now</div>
+
+<p>Additionally, to support suspend and hibernation, the pm-utils package must be installed.  Check to see that these commands are run-able from a terminal prompt as well:</p>
+
+<div class="bigcode">sudo&nbsp;pm-suspend --help<br>sudo&nbsp;pm-hibernate --help</div>
+
+<p>Not all linux distros include those commands in a default installation. Consult your distro's documentation for adding (if necessary) the sudo, shutdown and pm-utils packages.</p>
+
+<p>To finish installing the plugin for Linux, do the following:<p>
+<div class="indented">
+
+<p>Open a terminal window: gnome-terminal, konsole or via ssh if your server is headless.</p>
+
+<p>Do the following: make the setup script file executable and then execute it by copying and pasting these commands into the terminal window:</p>
+
+<div class="smallcode">#
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+sudo&nbsp;chmod&nbsp;a+x&nbsp;[% pluginpath %]/scripts/unix/srvrpowerctrl-setup.sh<br>
+</span>
+</div><br>
+<div class="smallcode">#
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+sudo&nbsp;[% pluginpath %]/scripts/unix/srvrpowerctrl-setup.sh<br>
+</span>
+</div>
+
+<p>Next, verify that the '[% sbsuser %]' user now has permission to shutdown the system without raising any prompts.  We'll do this by running a test script which performs a FAKE shutdown...your system won't actually halt, but we will be able to test to see that permissions have been correctly set.  In the terminal window, try executing the following command:</p>
+
+<div class="smallcode">#
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+   sudo -u [% sbsuser %] /usr/local/sbin/spc-test.sh
+</span>
+</div>
+<p>The sudo command may prompt you for YOUR password, which is appropriate in this case. If the script responds with
+<tt style="font-size:.8em;"> SUCCESS!</tt>, then the plugin ought to be able to shutdown/restart/etc your system from the [% sbsservername %] service.  If, however, the script responds with
+<tt style="font-size:.8em;"> ERROR!</tt>, then something is amiss. If this is the case, try running the setup script again.  Remember, the test script won't actually shutdown your system.</p>
+
+<p>Finally, your hardware may require adding &ldquo;quirks&rdquo; to the pm-suspend command line in order for S3 sleep/suspend and resume to function properly.  Unfortunately, this can only be determined by trial and error. See the <a href="/Default/plugins/SrvrPowerCtrl/html/quirk-suspend-explain.html">Sleep Quirk Debugger page</a> for more information.  If your testing shows that
+&ldquo;quirks&rdquo;</a> are required by your server hardware, then be sure to add them to the pm-suspend command line at [% sbsservername %]&rarr;Settings&rarr;Plugins&rarr;SrvrPowerCtrl&rarr;Settings&rarr;Suspend&nbsp;Command:<br><br>
+</p>
+</div>
+
+<p>One final note: some Linux distros (e.g. Ubuntu), when installed in a dual-boot environment, default to keeping the system hardware clock set to LOCAL time rather than to UTC.  In order for system wakeup-for-alarms scheduling to work with these systems, change the &ldquo;Schedule Wakeup Command&rdquo; from:<br><br>
+
+    <tt style="font-size:.8em;">/usr/local/sbin/spc-wakeup.sh %d</tt><br><br>
+-- to --<br><br>
+    <tt style="font-size:.8em;">/usr/local/sbin/spc-wakeup.sh %l</tt><br><br>
+</p>
+
+<p>If your distro is not Debian, Ubuntu, Redhat or Fedora, it may use different commands to initiate a shutdown/restart/suspend/hibernation.  If so, edit the command lines on the [% sbsservername %]&rarr;Settings&rarr;Plugins&rarr;Server Power Control&rarr;Settings page accordingly.</p>
+
+<p>If you'd prefer to make your linux system settings changes manually (rather than using the above setup script) please consult the <a href="/Default/plugins/SrvrPowerCtrl/html/readme.txt" >readme.txt</a> file for steps you'll need to carry out.</p>
+
+<p>&nbsp;</p>
+
+
+<hr />
+<table border="0" width="100%">
+<tr>
+<td align="left"><a href="/Default/plugins/SrvrPowerCtrl/html/help.html" >[% "PLUGIN_SRVRPOWERCTRL_BACKTO_HELP_PAGE" | string %]</a></td>
+<td align="center"><a href="/Default/plugins/SrvrPowerCtrl/html/troubleshooting.html" style="float:right;">[% "PLUGIN_SRVRPOWERCTRL_TROUBLESHOOTING_HELP_PAGE" | string %]</a></td>
+<td align="right"><a href="http://code.google.com/p/srvrpowerctrl/" style="text-align:center;">[% "PLUGIN_SRVRPOWERCTRL_HOME_PAGE" | string %]</a></td>
+</tr>
+</table>
+
+</div>
+
+[% PROCESS helpfooter.html %]

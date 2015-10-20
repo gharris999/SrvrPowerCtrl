@@ -1,0 +1,51 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[%- pageHeaderScripts = PROCESS jsSPCCompleted -%]
+[%- BLOCK jsSPCCompleted %]
+<script type="text/javascript">
+
+var nRefresh = [% refreshtime %];
+
+setTimeout( "update_confmsg()", ( (nRefresh == -1 ? 16 : nRefresh) /2) * 1000 );
+setTimeout( "redirect_page()", nRefresh * 1000 );
+
+
+function update_confmsg() {
+
+	document.getElementById('confmsg').innerHTML = '[% confirmedmessage %]';
+
+}
+
+function redirect_page() {
+
+	var szRedirect = '[% refreshurl %]';
+
+	if (nRefresh > 0) {
+		if (szRedirect.indexOf("http://") != -1) {
+			document.getElementById('confmsg').innerHTML = 'Redirecting to ' + szRedirect;
+			if (parent.parent) {
+				parent.parent.location = szRedirect;
+			} else {
+				parent.location = szRedirect;
+			}
+		} else {
+			parent.browser.location = '[% webroot %]' + szRedirect + '?action=[% action %]';
+		}
+	}
+}
+
+</script>
+<noscript>
+	<meta http-equiv="Refresh" content="[% refreshtime %]; url=[% refreshurl %]" />
+</noscript>
+[% END -%]
+[%- PROCESS pageheader.html -%]
+
+[% IF webroot == '/' %]
+	<div style="background-color:#404040; height:119px; margin-top:-2px; margin-right:-5px; margin-left:-5px;">
+	<img src="/Default/plugins/SrvrPowerCtrl/html/images/icon.png" alt="SrvrPowerCtrl" width="96" height="96" hspace="12" vspace="12" align="right" />
+	</div>
+[% END %]
+
+	<br><h3><div id="confmsg">[% actionmessage %]</div></h3>
+
+[% PROCESS pagefooter.html %]

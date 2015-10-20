@@ -1,0 +1,629 @@
+PLUGIN_SRVRPOWERCTRL_MODULE_NAME
+	EN	Server Power Control
+
+PLUGIN_SRVRPOWERCTRL_DESCRIPTION
+	EN	Allows you to control your server's power state using a SqueezeBox Controller, Squeezebox Remote, iPeng or SqueezePad.
+
+PLUGIN_SRVRPOWERCTRL_WEB_UI
+	EN	Server Power Control Actions
+
+PLUGIN_SRVRPOWERCTRL_BASIC_SETTINGS
+	EN	Server Power Control Settings
+
+PLUGIN_SRVRPOWERCTRL_BASIC_SETTINGS_HEADER
+	EN	Changes made here affect the functionality of the Server Power Control plugin.
+
+PLUGIN_SRVRPOWERCTRL_BASIC_SETTINGS_HEADER_STATS
+	EN	Server Power Control, version %s, is running on %s version %s on %s:%s, user %s %s
+
+PLUGIN_SRVRPOWERCTRL_SETUP_PAGE
+	EN	IMPORTANT: Instructions on how to finish setting up SrvrPowerCtrl..
+
+PLUGIN_SRVRPOWERCTRL_HELP_PAGE
+	EN	Help with SrvrPowerCtrl
+
+PLUGIN_SRVRPOWERCTRL_HOME_PAGE
+	EN	SrvrPowerCtrl Home Page on GoogleCode..
+
+PLUGIN_SRVRPOWERCTRL_BACKTO_HELP_PAGE
+	EN	Back to SrvrPowerCtrl help.
+
+PLUGIN_SRVRPOWERCTRL_TROUBLESHOOTING_HELP_PAGE
+	EN	SrvrPowerCtrl Troubleshooting.
+
+PLUGIN_SRVRPOWERCTRL_LOGGING_VIEW_LOG
+	EN	View the Server Power Control entries in the server.log
+
+PLUGIN_SRVRPOWERCTRL_LOGGING_MAIL_PROBREPORT
+	EN	Email Problem Report
+
+PLUGIN_SRVRPOWERCTRL_LOGGING_MAIL_PROBREPORT_DESC
+	EN	Click this button to generate a SrvrPowerCtrl email problem report.
+
+PLUGIN_SRVRPOWERCTRL_WIN_HELP_PAGE
+	EN	Windows (XP, Vista, Windows 7) setup instructions.
+
+PLUGIN_SRVRPOWERCTRL_UNIX_HELP_PAGE
+	EN	Unix/Linux (Debian, Ubuntu, Redhat, Fedora, CentOS & etc.) setup instructions.
+
+PLUGIN_SRVRPOWERCTRL_MAC_HELP_PAGE
+	EN	Apple OS X setup instructions.
+
+PLUGIN_SRVRPOWERCTRL_UNSUPPOS_HELP_PAGE
+	EN	Generic setup instructions.
+
+PLUGIN_SRVRPOWERCTRL_UNSUPPOS_HELP_MSG
+	EN	Warning! Your server&rsquo;s operating system %s is not supported by SrvrPowerCtrl.
+
+PLUGIN_SRVRPOWERCTRL_NEEDSSETUP_HELP_MSG
+	EN	SrvrPowerCtrl appears to need to be enabled on this server.
+
+PLUGIN_SRVRPOWERCTRL_NEEDSSETUP_HELP_MSG2
+	EN	<b>SrvrPowerCtrl appears to need further setup on this server.<br>Please click on this help page link for instructions.</b><br>
+
+PLUGIN_SRVRPOWERCTRL_ALREADYSETUP_HELP_MSG
+	EN	SrvrPowerCtrl appears already enabled on this server.  However, if you've upgraded from a previous verion of SqueezeCenter or SqueezeBox Server, you may need to run the SrvrPowerCtrl setup script again since the new version may run under &lsquo;credentials&rsquo; than the old. The setup script modifies your system permissions.  Also, if you've upgraded to a new version of SrvrPowerCtrl, you may need to reset the settings by clicking on the 'Reset all settings back to defaults' link at the bottom of the settings page.
+
+PLUGIN_SRVRPOWERCTRL_ALREADYSETUPWIN_HELP_MSG
+	EN	SrvrPowerCtrl appears already enabled on this server.  If you've upgraded to a new version of SrvrPowerCtrl, you may need to reset the settings by clicking on the 'Reset all settings back to defaults' link at the bottom of the settings page.
+
+PLUGIN_SRVRPOWERCTRL_WRONGDISTRO_HELP_MSG
+	EN	WARNING! These setup instructions do not apply to %s, your server&rsquo;s operating system.
+
+PLUGIN_SRVRPOWERCTRL_BASIC_COMMANDS
+	EN	Basic Commands:
+
+PLUGIN_SRVRPOWERCTRL_BASIC_COMMAND_TWEAKS
+	EN	Command Tweaks:
+
+PLUGIN_SRVRPOWERCTRL_BASIC_ALTERNATE_SERVER
+	EN	Alternate Server:
+
+PLUGIN_SRVRPOWERCTRL_WAKE_INTERACTIONS
+	EN	Schedule System Wake-ups for:
+
+PLUGIN_SRVRPOWERCTRL_ON_WAKEUP
+	EN	On-wakeup Actions:
+
+PLUGIN_SRVRPOWERCTRL_SLEEP_INTERACTIONS
+	EN	Sleep Settings:
+
+PLUGIN_SRVRPOWERCTRL_IDLE_MONITOR
+	EN	System Idle Monitor:
+
+PLUGIN_SRVRPOWERCTRL_EOD_MONITOR
+	EN	End of Day:
+
+PLUGIN_SRVRPOWERCTRL_DEFAULT_SETTINGS
+	EN	Default Settings:
+
+PLUGIN_SRVRPOWERCTRL_RESET_TO_DEFAULTS
+	EN	Reset all settings :
+
+PLUGIN_SRVRPOWERCTRL_RESET_SETTINGS
+	EN	Reset all settings back to default values
+
+PLUGIN_SRVRPOWERCTRL_RESET_SETTINGS_DESC
+	EN	Clicking this option will reset all the SrvrPowerCtrl settings back to the default values.  Think twice!  There's no &ldquo;undo&rdquo; here.
+
+PLUGIN_SRVRPOWERCTRL_POWEROFFPLAYERS
+	EN	Power-off attached players<br> when shutting down?
+
+PLUGIN_SRVRPOWERCTRL_POWEROFFPLAYERS_DESC
+	EN	If you are using IRBlaster, PowerCenter or another plugin to power-off an amplifier or other device, enable this checkbox to turn off all attached players as part of the shutting-down&#47;restarting&#47;suspending&#47;etc. process.
+
+PLUGIN_SRVRPOWERCTRL_REGRET_DELAY
+	EN	Cancel&#47;Delay time (seconds):
+
+PLUGIN_SRVRPOWERCTRL_REGRET_DELAY_DESC
+	EN	Enter the number of seconds the plugin will wait before taking action.  This time delay allows you to change your mind about shutting-down&#47;restarting&#47;suspending&#47;etc. by pressing the left-key on the IR remote or the center key on the SBC.
+
+PLUGIN_SRVRPOWERCTRL_ALTSRVR_LABEL
+	EN	Alternate server for players:
+
+PLUGIN_SRVRPOWERCTRL_ALTSRVR_LABEL_DESC
+	EN	Select the alternate server to push players onto when SrvPowerCtrl performs a Shutdown&#47;Restart&#47;Suspend&#47;Hibernate&#47;etc. action.  If you have a Squeezebox Touch running 'tinysc', this is a good choice for a server.  Otherwise, select 'www.mysqueezebox.com'.
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_DELAY
+	EN	Alternate server delay time:
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_DELAY_UNITS
+	EN	(seconds)
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_DELAY_DESC
+	EN	Enter the number of seconds the plugin will wait after switching the player to the alternate server before taking action.  This time delay allows the SBC to &ldquo;follow&rdquo; the controlled player over. If you don't have a SBC, you can reduce this value to a lower value.
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_ALLPLAYERS
+	EN	Switch ALL players when switching to alternate server?
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_ALLPLAYERS_DESC
+	EN	Normally, when you select &ldquo;Suspend to Alternate Server&rdquo; or the like from SrvrPowerCtrl&rsquo;s menu, just the player from which you initiate the action gets switched to the alternate server.  Select this option to switch ALL attached players.
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_UNSYNC
+	EN	Unsync players before switching to alternate server?
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_UNSYNC_DESC
+	EN	If selected, SrvrPowerCtrl will unsync each player before switching it to the alternate server.  After resume from sleep, when SrvrPowerCtrl fetches players back from the alternate server, the sync for each player will be restored.
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_POWEROFFPLAYERS
+	EN	Request player power-off on the remote server?
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_POWEROFFPLAYERS_DESC
+	EN	If selected, SrvrPowerCtrl will send a power-off request to the remote server for each player it sends its way.
+
+PLUGIN_SRVRPOWERCTRL_PUSH2ASPLAYERS_MACS
+	EN	Specific players to switch (or not) to the alternate server:
+
+PLUGIN_SRVRPOWERCTRL_PUSH2ASPLAYERS_MACS_DESC
+	EN	If the ALL players is checked just above, leave this entry blank to switch all connected players to the alternate server.  To switch only specific players, enter one or more MAC addresses, separated by a &ldquo;,&rdquo; -- e.g. &ldquo;00:04:20:10:02:05,00:04:20:16:06:09&rdquo;. If you prefix a MAC address with a ! exclamation point, e.g. &ldquo;!00:04:20:10:02:05&rdquo, that player will NOT get pushed to the alternate server.  The ! coupled with the 'Switch ALL' setting specifies 'all except'.  You can find your players' MAC addresses on the Settings - Information page.
+
+PLUGIN_SRVRPOWERCTRL_ONXSHUTDOWN_PUSH2AS
+	EN	Push players to alternate server on &ldquo;external&rdquo; shutdown:
+
+PLUGIN_SRVRPOWERCTRL_ONXSHUTDOWN_PUSH2AS_DESC
+	EN	Check this option to have players pushed to the alternate server when Squeezebox Server is stopped or the server is shutdown by an &ldquo;external&rdquo; cause, i.e. NOT by SrvrPowerCtrl.  With this option set, a shutdown event &mdash; like shutting down the server by pressing its power button &mdash; will send your players to the alternate server.
+
+PLUGIN_SRVRPOWERCTRL_ONXSHUTDOWN_CMD
+	EN	Optional special command to execute on &ldquo;external&rdquo; shutdown:
+
+PLUGIN_SRVRPOWERCTRL_ONXSHUTDOWN_CMD_DESC
+	EN	Optional: enter a special command here that will be executed when SrvrPowerCtrl detects an &ldquo;external&rdquo; shutdown.
+
+PLUGIN_SRVRPOWERCTRL_CMD_DESC
+	EN	Enter the full path and any cmd line arguments to the system command here.
+
+PLUGIN_SRVRPOWERCTRL_INCLUDESHUTDOWN
+	EN	Include &lsquo;Shutdown&rsquo; as a menu option?
+
+PLUGIN_SRVRPOWERCTRL_INCLUDESHUTDOWN2AS
+	EN	Include &lsquo;Shutdown to %s&rsquo; as a menu option?
+
+PLUGIN_SRVRPOWERCTRL_SHUTDOWN_CMD
+	EN	Shutdown Command (include full path<br> and cmd line args):
+
+PLUGIN_SRVRPOWERCTRL_INCLUDEREBOOT
+	EN	Include &lsquo;Reboot Server&rsquo; as a menu option?
+
+PLUGIN_SRVRPOWERCTRL_REBOOT_CMD
+	EN	Reboot Server Command:
+
+PLUGIN_SRVRPOWERCTRL_INCLUDESUSPEND
+	EN	Include &lsquo;Suspend&rsquo; as a menu option?
+
+PLUGIN_SRVRPOWERCTRL_INCLUDESUSPEND2AS
+	EN	Include &lsquo;Suspend to %s&rsquo; as a menu option?
+
+PLUGIN_SRVRPOWERCTRL_SUSPEND_CMD
+	EN	Suspend Command:
+
+PLUGIN_SRVRPOWERCTRL_INCLUDEHIBERNATE
+	EN	Include &lsquo;Hibernate&rsquo; as a menu option?
+
+PLUGIN_SRVRPOWERCTRL_INCLUDEHIBERNATE2AS
+	EN	Include &lsquo;Hibernate to %s&rsquo; as a menu option?
+
+PLUGIN_SRVRPOWERCTRL_HIBERNATE_CMD
+	EN	Hibernate Command:
+
+PLUGIN_SRVRPOWERCTRL_INCLUDESCRESTART
+	EN	Include &lsquo;Restart Squeezebox Server service&rsquo; as a menu option?
+
+PLUGIN_SRVRPOWERCTRL_SCRESTART_CMD
+	EN	Restart Squeezebox Server service Command:
+
+PLUGIN_SRVRPOWERCTRL_SCRESTART_CMD_DESC
+	EN	For SqueezeCenter 7.3, enter the full path and any cmd line arguments to the system command here.  For Squeezebox Server 7.4 and above, this facility is built into Squeezebox Server so the cli://restartserver command is used instead.
+
+PLUGIN_SRVRPOWERCTRL_CUSTOM_COMMANDS
+	EN	Custom Commands:
+
+PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_LABEL
+	EN	Custom Command label / command:
+
+PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_LABEL_DESC
+	EN	Enter a descriptive label and a custom command here in order to have them show up on the SrvrPowerCtrl menu.  The command may be any system utility or script that the squeezeboxserver user has permission to execute.  Optionally, you may preface any command with &ldquo;cli://&rdquo; to indicate that the command should be executed by Squeezebox Server's CLI interface. You'll need to &lsquo;apply&rsquo; the settings before these custom commands show up in any of the &lsquo;actions&rsquo; drop-down lists.  If you begin a label with "." (e.g. ".Hidden Command"), then that command will be hidden on the menus, but still show up in drop-down lists of available actions.
+
+PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_LABEL_DEF
+	EN	label
+
+PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_CMD_DEF
+	EN	command
+
+PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_CMD
+	EN	Custom Command:
+
+PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_MSG
+	EN	Executing
+
+PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_DONE_MSG
+	EN	Custom command finished
+
+PLUGIN_SRVRPOWERCTRL_INCLUDEWEBINTERFACE
+	EN	Include menu options on Web Interface?
+
+PLUGIN_SRVRPOWERCTRL_INCLUDEWEBINTERFACE_DESC
+	EN	Check this to add a &ldquo;Server Power Control&rdquo; menu to Squeeze Center's web interface home page &ldquo;Extras&rdquo; menu.
+
+PLUGIN_SRVRPOWERCTRL_HOOK_SLEEP_BUTTON
+	EN	Assign Server Power Control action<br>to the Sleep+Hold button?
+
+PLUGIN_SRVRPOWERCTRL_HOOK_SLEEP_BUTTON_DESC
+	EN	Check this box to activate Server Power Control by pressing & holding the sleep button on the Squeezebox Remote.  The normal &ldquo;sleep&rdquo; functionality activated via a short sleep button press will remain available.  NOTE: this function is currently unavailable on the SBTouch and SBRadio.
+
+PLUGIN_SRVRPOWERCTRL_SLEEP_BUTTON_ACTION
+	EN	Sleep+Hold action to take:
+
+PLUGIN_SRVRPOWERCTRL_SLEEP_BUTTON_ACTION_DESC
+	EN	Select which action you would like performed when pressing and holding the sleep button on the IR remote.
+
+PLUGIN_SRVRPOWERCTRL_DEFER_WHILE_SLEEP_PLAYING
+	EN	Defer action if sleep timer is active?
+
+PLUGIN_SRVRPOWERCTRL_DEFER_WHILE_SLEEP_PLAYING_DESC
+	EN	Check this box to defer the Shutdown&#47;Restart&#47;Suspend&#47;Hibernate&#47;etc. action until the sleep timer (if any) ends and playback stops.
+
+PLUGIN_SRVRPOWERCTRL_SLEEP_WATCHDOG
+	EN	Monitor Sleep Timers?
+
+PLUGIN_SRVRPOWERCTRL_SLEEP_WATCHDOG_DESC
+	EN	Check this to monitor the sleep timer on all connected players.  The action specified below will be taken at the conclusion of any sleep timer.
+
+PLUGIN_SRVRPOWERCTRL_SLEEP_WATCHDOG_ACTION
+	EN	Action to take after sleep timer?
+
+PLUGIN_SRVRPOWERCTRL_SLEEP_WATCHDOG_ACTION_DESC
+	EN	Select which action you would like performed at the conclusion of any sleep timer.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_MONITOR_SYSTEM
+	EN	Monitor the system for idle conditions?
+
+PLUGIN_SRVRPOWERCTRL_IDLE_MONITOR_SYSTEM_DESC
+	EN	Keep this setting checked to enable SrvrPowerCtrl to perform idle monitoring during the regular and end-of-day periods.  If the system has been idle for the number of minutes entered below, then the action specified is taken.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_PLAYERS
+	EN	Monitor Idle Squeezebox Players?
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_PLAYERS_DESC
+	EN	Check this to monitor all connected players.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_LOGONS
+	EN	Monitor logons?
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_LOGONS_DESC
+	EN	Check this to monitor login sessions.  If there are active login sessions (via the graphical desktop, text console, ssh, etc.) then the system is flagged as 'not idle'.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_SAMBA
+	EN	Monitor Samba?
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_SAMBA_DESC
+	EN	Check this to monitor Samba file sharing.  If there are active Samba file or session locks, then the system is flagged as 'not idle'.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_NET_THRESHOLD
+	EN	Idle network IO threshold:
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_NET_THRESHOLD_DESC
+	EN	Enter the network IO activity threshold (kilobytes per minute). If network activity remains below the threshold, the system is flagged as 'idle'.  Enter 0 to disable network monitoring.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_NET_UNITS
+	EN	(kb / minute)
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISABLED_UNITS
+	EN	(disabled)
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISKS_THRESHOLD
+	EN	Idle disk IO threshold:
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISKS_THRESHOLD_DESC
+	EN	Enter the disk IO activity threshold (sectors per minute). If disk activity remains below the threshold, the system is flagged as 'idle'. Enter 0 to disable disk IO monitoring.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISKS_UNITS
+	EN	(sectors / minute)
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CPU_THRESHOLD
+	EN	CPU load threshold:
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CPU_THRESHOLD_DESC
+	EN	Enter the CPU load threshold (should be between 0 and 10). If CPU load remains below the threshold per minute, the system is flagged as 'idle'.  Note: the threshold is checked against the system 'uptime' command's one minute "load average". Enter 0 to disable CPU load monitoring.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CPU_UNITS
+	EN	(between 0 and 10)
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CUST_CMD
+	EN	Custom Idle check command:
+
+PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CUST_CMD_DESC
+	EN	Enter the path to a script or system command here that SrvrPowerCtrl will execute to perform a custom idle check.  If the command returns 0, SrvrPowerCtrl assumes the system is idle.  If the command returns 1 or above, SrvrPowerCtrl assumes the system is not idle.  Leave blank to disable custom idle checking.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_IDLETIME
+	EN	Allowed system idle time:
+
+PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_IDLETIME_DESC
+	EN	Enter the number of idle minutes after which the action specified below will be taken.
+
+PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_IDLETIME_UNITS
+	EN	(minutes)
+
+PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_ACTION
+	EN	Action to take after idle time:
+
+PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_ACTION_DESC
+	EN	Select which action you would like performed when the system has been idle for the time specified above.
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG
+	EN	Perform end-of-day action?
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_DESC
+	EN	Use this feature to shutdown&#47;suspend&#47;hibernate&#47;etc. your system at a specific time of day.  The action specified will be taken when Server Power Control detects that all connected players have been idle for the number of minutes set below.
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_IDLETIME
+	EN	Allowed idle time (minutes):
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_IDLETIME_DESC
+	EN	Enter the number of minutes after which the action specified below will be taken. Make this setting &ldquo;0&rdquo; (zero) to force the end-of-day action at the EOD start time regardless of whether or not players are playing. If you do this, you should make the EOD period time window less than 10 minutes.
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_TIMES
+	EN	End-of-day start &amp; end times (HH:MM):
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_TIMES_DESC
+	EN	Enter the times of day (HH:MM, 24hour or AM/PM) to begin &amp; end monitoring for idle players.
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_STARTTIME
+	EN	End-of-day start time (HH:MM):
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_STARTTIME_DESC
+	EN	Enter the time of day (HH:MM, 24hour clock) to begin monitoring for idle players.
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_ENDTIME
+	EN	End-of-day end time (HH:MM):
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_ENDTIME_DESC
+	EN	Enter the time of day (HH:MM, 24hour clock) to end monitoring for idle players.
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_ACTION
+	EN	Action to take after idle time:
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_ACTION_DESC
+	EN	Select which action you would like performed when all players have been idle for the time specified above during the end-of-day period.
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_CMD
+	EN	Custom end-of-day action command:
+
+PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_CMD_DESC
+	EN	To execute a custom end-of-day script, enter the appropriate path and command line arguments here.  Any system command entered here will be executed in place of the action selected above.  The &ldquo;squeezeboxserver&rdquo; user must have permissions to execute the command.  On Linux systems, this is usually granted through an entry in the /etc/sudoers file.
+
+PLUGIN_SRVRPOWERCTRL_SETALARMRTCWAKEUP
+	EN	Squeezebox Alarms?
+
+PLUGIN_SRVRPOWERCTRL_SETALARMRTCWAKEUP_DESC
+	EN	If you've set an alarm for a player, selecting this option will cause the server to &ldquo;wake up&rdquo; in advance of the alarm.  SrvrPowerCtrl will also treat library scans scheduled with the &lsquo;Rescan&rsquo; plugin as an &lsquo;alarm&rsquo;, waking the server in time to perform the scan.  Note: this feature may not work with some operating systems or with older server hardware. On Windows machines, this feature may only work when the system is suspended or hibernating, i.e. not fully shut down.
+
+PLUGIN_SRVRPOWERCTRL_SETEODRTCWAKEUP
+	EN	End-of-day actions?
+
+PLUGIN_SRVRPOWERCTRL_SETEODRTCWAKEUP_DESC
+	EN	If you've set an end-of-day action, above, that differs from the normal on-idle action, this option will cause Server Power Control to schedule the system to wake up to perform the action.
+
+PLUGIN_SRVRPOWERCTRL_SETRESCANRTCWAKEUP
+	EN	Scheduled library rescans?
+
+PLUGIN_SRVRPOWERCTRL_SETRESCANRTCWAKEUP_DESC
+	EN	If you've scheduled an automatic library rescan using the Rescan Music Library plugin, this option will cause Server Power Control to schedule the system to wake up so that the scan can execute.
+
+PLUGIN_SRVRPOWERCTRL_SETCRONTABRTCWAKEUP
+	EN	Root Crontab Events?
+
+PLUGIN_SRVRPOWERCTRL_SETCRONTABRTCWAKEUP_DESC
+	EN	With this option enabled and if you've scheduled tasks using the system's root crontab, Server Power Control will wake or boot the system so the tasks are executed by the system cron service.  This option requires that the squeezeboxserver user has passwordless permission to run &ldquo;crontab -l&rdquo; in the /etc/sudoers file.
+
+PLUGIN_SRVRPOWERCTRL_RTCWAKEUPADVANCE
+	EN	Number of minutes before the<br>alarm/action to wake up the server:
+
+PLUGIN_SRVRPOWERCTRL_RTCWAKEUPADVANCE_DESC
+	EN	Increase this value if your server takes an especially long time to boot up.
+
+PLUGIN_SRVRPOWERCTRL_SETRTCWAKEUP_CMD
+	EN	Schedule Wakeup Command:
+
+PLUGIN_SRVRPOWERCTRL_SETRTCWAKEUP_CMD_DESC
+	EN	Enter the full path and any cmd line arguments to the system wakeup command here. If you include &ldquo;%d&rdquo; as a cmd line argument, SrvrPowerCtrl replaces this with the unix epoch UTC date/time value for the wakeup time, e.g. &ldquo;1230789300&rdquo;.  For linux systems whose hardware clock is set to local time, use &ldquo;%l&rdquo;.  If you include &ldquo;%s&rdquo;, then SrvrPowerCtrl substitutes a date/time string in the local time, e.g. &ldquo;01/01/2009 05:55:00&rdquo;.  &ldquo;%f&rdquo; gets translated into the system local time &ldquo;short-date&rdquo; format in your locale; &ldquo;%t&rdquo; gets translated into the system local time &ldquo;time&rdquo; in HH:MM:SS format.
+
+PLUGIN_SRVRPOWERCTRL_ONWAKEUP_WATCHDOG
+	EN	Take other action on wakeup?
+
+PLUGIN_SRVRPOWERCTRL_ONWAKEUP_WATCHDOG_DESC
+	EN	Check this option to have SrvrPowerCtrl run a command or script when the system resumes from suspend or hibernation.  This can be especially helpful in working around the tendency of Windows servers to automatically suspend two minutes after a wake-on-lan.  This feature is automatically enabled if &ldquo;Restore Alternate Server<br>connected players on wakeup&rdquo; is enabled. The &ldquo;On wakeup command&rdquo; entry can remain blank.
+
+PLUGIN_SRVRPOWERCTRL_ONWAKEUP_CMD
+	EN	Optional on-wakeup command:
+
+PLUGIN_SRVRPOWERCTRL_ONWAKEUP_CMD_DESC
+	EN	Optional: enter a special command here that will be executed when the system wakes up from suspend or hibernation.  If your command needs the system time on wakeup as a cmd line argument, use the same format as the &ldquo;Schedule Wakeup Command&rdquo;:(&ldquo;%d&rdquo;, &ldquo;%l&rdquo;, &ldquo;%s&rdquo;, &ldquo;%f&rdquo; &ldquo;%t&rdquo;, etc.)
+
+PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS
+	EN	Restore Alternate Server<br>connected players on wakeup?
+
+PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_DESC
+	EN	Check this so that upon Squeezebox Server startup or wakeup after suspend or hibernation, players connected to Alternate Server will be automatically switched back to to this server.
+
+PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_FORCE
+	EN	Restore players forcefully?
+
+PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_FORCE_DESC
+	EN	Normally, SrvrPowerCtrl only tries to restore players previously pushed onto the alternate server.  Check this setting to force SrvrPowerCtrl to reconnect ALL players on the alternate server at wake-up time.
+
+PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_WAIT
+	EN	Seconds to wait before<br>trying to restore:
+
+PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_WAIT_DESC
+	EN	Enter the number of seconds the plugin will wait after Squeezebox Server startup or wakeup before switching players back from the alternate server.  Depending upon your internet connection, you may need to increase this value.
+
+PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_MACS
+	EN	Specific players to restore:
+
+PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_MACS_DESC
+	EN	Leave this entry blank to restore all Alternate Server connected players.  To restore only specific players, enter one or more MAC addresses, separated by a &ldquo;,&rdquo; -- e.g. &ldquo;00:04:20:10:02:05,00:04:20:16:06:09&rdquo;. You can find your players' MAC addresses on the Settings - Status page.
+
+PLUGIN_SRVRPOWERCTRL_LOG_SETTINGS
+	EN	Server Power Control Log:
+
+PLUGIN_SRVRPOWERCTRL_LOG_SETLOG
+	EN	Set Logging Level:
+
+PLUGIN_SRVRPOWERCTRL_LOG_SETLOG_DESC
+	EN	Server Power Control prints diagnostic messages in the server.log.  Changing this setting to 'Debug' makes SrvrPowerCtrl progressively more 'chatty'.
+
+PLUGIN_SRVRPOWERCTRL_MENU
+	EN	Server Power Control Menu
+
+PLUGIN_SRVRPOWERCTRL_MENU_CHOOSE_BELOW
+	EN	Choose a Server Power Control action below:
+
+PLUGIN_SRVRPOWERCTRL_NOACTION
+	EN	Do nothing, i.e. stay awake!
+
+PLUGIN_SRVRPOWERCTRL_SHUTDOWN
+	EN	Shutdown Server
+
+PLUGIN_SRVRPOWERCTRL_SHUTDOWN_MSG
+	EN	Shutting Down Server
+
+PLUGIN_SRVRPOWERCTRL_SHUTDOWN_DONE_MSG
+	EN	Shut Down
+
+PLUGIN_SRVRPOWERCTRL_SUSPEND
+	EN	Suspend Server
+
+PLUGIN_SRVRPOWERCTRL_SUSPEND_MSG
+	EN	Suspending Server
+
+PLUGIN_SRVRPOWERCTRL_SUSPEND_DONE_MSG
+	EN	Server Suspended
+
+PLUGIN_SRVRPOWERCTRL_HIBERNATE
+	EN	Hibernate Server
+
+PLUGIN_SRVRPOWERCTRL_HIBERNATE_MSG
+	EN	Hibernating Server
+
+PLUGIN_SRVRPOWERCTRL_HIBERNATE_DONE_MSG
+	EN	Server Hibernated
+
+PLUGIN_SRVRPOWERCTRL_REBOOT
+	EN	Reboot Server
+
+PLUGIN_SRVRPOWERCTRL_REBOOT_MSG
+	EN	Rebooting Server
+
+PLUGIN_SRVRPOWERCTRL_REBOOT_DONE_MSG
+	EN	Server Rebooted
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_MSG
+	EN	Pushing players to Alternate Server
+
+PLUGIN_SRVRPOWERCTRL_PUSH2AS_DONE_MSG
+	EN	Players pushed to Alternate Server
+
+PLUGIN_SRVRPOWERCTRL_GETFROMSN_MSG
+	EN	Fetching players from Alternate Server
+
+PLUGIN_SRVRPOWERCTRL_GETFROMSN_DONE_MSG
+	EN	Players fetched from Alternate Server
+
+PLUGIN_SRVRPOWERCTRL_SHUTDOWN2AS
+	EN	Shutdown to %s
+
+PLUGIN_SRVRPOWERCTRL_SHUTDOWN2AS_MSG
+	EN	Shutting down to %s
+
+PLUGIN_SRVRPOWERCTRL_SHUTDOWN2AS_DONE_MSG
+	EN	Server has shutdown
+
+PLUGIN_SRVRPOWERCTRL_SUSPEND2AS
+	EN	Suspend to %s
+
+PLUGIN_SRVRPOWERCTRL_SUSPEND2AS_MSG
+	EN	Suspending to %s
+
+PLUGIN_SRVRPOWERCTRL_SUSPEND2AS_DONE_MSG
+	EN	Server is suspended
+
+PLUGIN_SRVRPOWERCTRL_HIBERNATE2AS
+	EN	Hibernate to %s
+
+PLUGIN_SRVRPOWERCTRL_HIBERNATE2AS_MSG
+	EN	Hibernating to %s
+
+PLUGIN_SRVRPOWERCTRL_HIBERNATE2AS_DONE_MSG
+	EN	Server is hibernated
+
+PLUGIN_SRVRPOWERCTRL_SCRESTART
+	EN	Restart Squeezeboxserver
+
+PLUGIN_SRVRPOWERCTRL_SCRESTART_MSG
+	EN	Restarting Squeezeboxserver Service
+
+PLUGIN_SRVRPOWERCTRL_SCRESTART_DONE_MSG
+	EN	Squeezeboxserver service has restarted
+
+PLUGIN_SRVRPOWERCTRL_SETBLOCK
+	EN	Block Shutdown/Suspend/etc.
+
+PLUGIN_SRVRPOWERCTRL_SETBLOCK_MSG
+	EN	Blocking shutdown/suspend/etc.
+
+PLUGIN_SRVRPOWERCTRL_SETBLOCK_DONE_MSG
+	EN	Shutdown/suspend/etc. blocked
+
+PLUGIN_SRVRPOWERCTRL_CLEARBLOCK
+	EN	Clear block
+
+PLUGIN_SRVRPOWERCTRL_CLEARBLOCK_MSG
+	EN	Clearing block
+
+PLUGIN_SRVRPOWERCTRL_CLEARBLOCK_DONE_MSG
+	EN	Block cleared
+
+PLUGIN_SRVRPOWERCTRL_BLOCKED_MSG
+	EN	Action blocked..
+
+PLUGIN_SRVRPOWERCTRL_BLOCKEDACTION_MSG
+	EN	%s is unavailable.  %s is requesting that the server stay running because %s.
+
+PLUGIN_SRVRPOWERCTRL_BLOCKFILE_MSG
+	EN	%s is unavailable.  Blockfile %s present.
+
+PLUGIN_SRVRPOWERCTRL_PENDINGACTION_MSG
+	EN	%s is unavailable.  %s is already pending
+
+PLUGIN_SRVRPOWERCTRL_CANCEL
+	EN	Cancel Action
+
+PLUGIN_SRVRPOWERCTRL_CANCEL_MSG
+	EN	Press the left key to cancel..
+
+PLUGIN_SRVRPOWERCTRL_CANCELJIVE_MSG
+	EN	Press the center key to cancel..
+
+PLUGIN_SRVRPOWERCTRL_CANCELTOUCH_MSG
+	EN	Press the entry again to cancel..
+
+PLUGIN_SRVRPOWERCTRL_CANCELED_MSG
+	EN	Action canceled..
+
+PLUGIN_SRVRPOWERCTRL_SPECIALCMD
+	EN	Custom Script
+
+PLUGIN_SRVRPOWERCTRL_TIMEOUT_MSG
+	EN	in %d seconds..
+
+PLUGIN_SRVRPOWERCTRL_SLEEP_TIMEOUT_MSG
+	EN	in %d minutes..
+
+PLUGIN_SRVRPOWERCTRL_SPECIALCMD_MSG
+	EN	Running custom script
+
+PLUGIN_SRVRPOWERCTRL_FAILURE_MSG
+	EN	%s failed!.
+
+PLUGIN_SRVRPOWERCTRL_EMPTY
+	EN	empty

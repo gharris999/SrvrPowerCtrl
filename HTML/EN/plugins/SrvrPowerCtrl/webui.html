@@ -1,0 +1,30 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[%- PROCESS pageheader.html -%]
+[% IF webroot == '/' %]
+	<div style="background-color:#404040; height:93px; margin-top:-2px; margin-right:-5px; margin-left:-5px;">
+	<img src="/Default/plugins/SrvrPowerCtrl/html/images/icon.png" alt="SrvrPowerCtrl" width="64" height="64" hspace="12" vspace="12" align="left" />
+	</div>
+[% END %]
+<div id="browsedbHeader"><br/>[% "PLUGIN_SRVRPOWERCTRL_MENU_CHOOSE_BELOW" | string %]<br/>&nbsp;</div>
+[% WRAPPER contentcontainer;
+	odd = 1; %]
+	[% FOREACH item = actionlist %]
+		[% WRAPPER contentitem %]
+			<a class="browseItemLink" href="[% webroot %]plugins/SrvrPowerCtrl/action.html?action=[% item.action | uri %]">[% item.menutext %]</a>
+		[% END;
+		odd = odd ? 0 : 1 -%]
+	[%- END %]
+[% END %]
+
+
+[% IF webroot == '/' %]
+<div align=center style="height:16px; text-align:center; padding-top:6px; margin-right:-5px; margin-left:-5px; background-color:#404040; color:#DDD; font-size:9px">
+	[% srvrpowerctrl_stats %]
+</div>
+[% END %]
+
+[% PROCESS pagefooter.html %]
+

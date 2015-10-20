@@ -1,0 +1,120 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[% PROCESS helpheader.html %]
+
+<style type="text/css">
+<!--
+h1 {
+	font-size:2em;
+}
+h3 {
+	font-size:large;
+}
+h4 {
+	font-size:1.4em;
+}
+p {
+	font-size:1.2em;
+}
+li {
+	font-size:1.2em;
+	padding:0em 0em 0em 2.8em;
+	text-indent: -1em;
+}
+-->
+</style>
+
+
+
+<div style="width:80%; margin-left:10%;">
+<p>&nbsp;</p>
+<p><a href="http://code.google.com/p/srvrpowerctrl/" target="_blank"><img src="images/icon.png" alt="SrvrPowerCtrl" width="56" height="56" hspace="10" align="left" /></a>
+<br><h3>Suspend Quirk Debugging</h3>
+<br /><br /><hr />
+<p>Your hardware may require adding &ldquo;quirks&rdquo; to the pm-suspend command line in order for S3 sleep/suspend and resume to function properly.  Unfortunately, this can be determined only by trial and error. See the <a href="http://people.freedesktop.org/~hughsient/quirk/quirk-suspend-try.html" target="_blank">Sleep Quirk Debugger page</a> for more information.</p>
+
+<p>If that link is unavailable, here is information from Google&rsquo;s cached copy of that page, current as of September, 2009:</p>
+
+<p>To see which pm-suspend command line quirk options are available, execute the following command from a terminal prompt:</p>
+
+<p><tt style="font-size:1em;"># pm-suspend --help</tt><br><br></p>
+
+<p>You ought to see a list of the possible quirks, something like this:</p>
+
+<p><tt style="font-size:1em;">pm-suspend [options]<br><br>
+Options can change how suspend or hibernate is done.<br><br>
+Auto quirk handler option:<br><br>
+&nbsp;&nbsp;--auto-quirks<br>
+&nbsp;&nbsp;Running without any options will also invoke auto quirk.<br><br>
+&nbsp;&nbsp;--store-quirks-as-fdi<br><br>
+Video quirk handler options:<br><br>
+&nbsp;&nbsp;--quirk-dpms-on<br>
+&nbsp;&nbsp;--quirk-dpms-suspend<br>
+&nbsp;&nbsp;--quirk-radeon-off<br>
+&nbsp;&nbsp;--quirk-reset-brightness<br>
+&nbsp;&nbsp;--quirk-s3-bios<br>
+&nbsp;&nbsp;--quirk-s3-mode<br>
+&nbsp;&nbsp;--quirk-vbe-post<br>
+&nbsp;&nbsp;--quirk-vbemode-restore<br>
+&nbsp;&nbsp;--quirk-vbestate-restore<br>
+&nbsp;&nbsp;--quirk-vga-mode3<br>
+&nbsp;&nbsp;--quirk-none</tt></p>
+
+<h3>What are the quirks actually doing?</h3>
+
+<hr4>DPMS On <span><tt style="font-size:1em;">--quirk-dpms-on</tt></span></hr4>
+<p>
+ This option forces the video hardware to turn on the screen during resume.
+ Most video adapters turn on the screen themselves, but if you get a blank screen on resume, that can be turned back on by moving the mouse or typing then this option may be useful.
+</p>
+
+<hr4>DPMS Suspend <span><tt style="font-size:1em;">--quirk-dpms-suspend</tt></span></hr4>
+<p>
+ This option forces the video hardware to turn off the output device when suspending.
+ Most video adapters seem to do this correctly, but some leave the backlight on (with a blank screen) using lots and lots of power in the process. If you can see the backlight is on when you have successfully suspended you may need to use this option.
+</p>
+
+<hr4>Radeon Off <span><tt style="font-size:1em;">--quirk-radeon-off</tt></span></hr4>
+<p>
+ This option forces Radeon hardware to turn on the brightness DAC and also to turn on the backlight during resume. You only need to do this on some old ThinkPads of the '30 series (T30, X31, R32,... ) with Radeon video hardware.
+</p>
+
+<hr4>S3 BIOS <span><tt style="font-size:1em;">--quirk-s3-bios</tt></span></hr4>
+<p>
+ This option calls the video BIOS <b>during</b> S3 resume. Unfortunately, it is not always allowed to call the video BIOS at this point, so sometimes adding this option can actually break resume on some systems.
+</p>
+
+<hr4>S3 MODE <span><tt style="font-size:1em;">--quirk-s3-mode</tt></span></hr4>
+<p>
+ This option initializes the video card into a VGA text mode, and then uses the BIOS to set the video mode. On some systems S3 BIOS only initializes the video bios to text mode, and so both S3 BIOS and S3 MODE are needed.
+</p>
+
+<hr4>VBE POST  <span><tt style="font-size:1em;">--quirk-vbe-post</tt></span></hr4>
+<p>
+ This option will attempt to run BIOS code located at <code>c000:0003</code> during resume.
+ This is the code also run by the system BIOS at boot in order to initialize the video hardware.
+</p>
+
+<hr4>VBE Mode Restore  <span><tt style="font-size:1em;">--quirk-vbemode-restore</tt></span></hr4>
+<p>
+ This option will save and restore the current VESA mode which may be necessary to avoid X screen corruption.
+ Using this feature on Intel graphics hardware is probably a bad idea.
+</p>
+
+<hr4>VBE State Restore <span><tt style="font-size:1em;">--quirk-vbestate-restore</tt></span></hr4>
+<p>
+ This option uses the VESA <code>0x4f0f</code> extensions to save and restore hardware state which may be invalid after suspend.
+</p>
+
+<hr4>VGA Mode 3 <span><tt style="font-size:1em;">--quirk-vga-mode3</tt></span></hr4>
+<p>
+ This option will try to re-enable the video card on resume.
+</p>
+
+<hr /><a href="/Default/plugins/SrvrPowerCtrl/html/help.html" >[% "PLUGIN_SRVRPOWERCTRL_BACKTO_HELP_PAGE" | string %]</a>
+
+</div>
+
+[% PROCESS helpfooter.html %]

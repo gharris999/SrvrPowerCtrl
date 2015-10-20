@@ -1,0 +1,114 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[% PROCESS helpheader.html %]
+
+<style type="text/css">
+<!--
+h1 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:large;
+}
+p {
+	font-size:1.2em;
+}
+li {
+	font-size:1.2em;
+	padding:0em 0em 0em 2.8em;
+	text-indent: -1em;
+}
+
+DIV.bigcode {
+	width: 1200px;
+	padding:1em;
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+
+DIV.smallcode {
+	width: 1200px;
+	padding: 1em;
+	margin-left:2.8em;
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+-->
+</style>
+
+<script language=javascript>
+function selectNode (node)
+{
+var selection, range, doc, win;
+
+if ((doc = node.ownerDocument) && (win = doc.defaultView) && typeof
+win.getSelection != 'undefined' && typeof doc.createRange !=
+'undefined' && (selection = window.getSelection()) && typeof
+selection.removeAllRanges != 'undefined')
+{
+range = doc.createRange();
+range.selectNode(node);
+selection.removeAllRanges();
+selection.addRange(range);
+}
+else if (document.body && typeof document.body.createTextRange !=
+'undefined' && (range = document.body.createTextRange()))
+{
+range.moveToElementText(node);
+range.select();
+}
+
+}
+
+
+function clearSelection ()
+{
+if (document.selection)
+document.selection.empty();
+else if (window.getSelection)
+window.getSelection().removeAllRanges();
+}
+</script>
+
+<div style="width:80%; margin-left:10%;">
+<p>&nbsp;</p>
+<h3>SrvrPowerCtrl plugin setup instructions for unsupported operating systems</h3>
+<p><a href="http://code.google.com/p/srvrpowerctrl/" target="_blank"><img src="images/icon.png" alt="SrvrPowerCtrl" width="84" height="84" hspace="10" align="left" /></a>SrvrPowerCtrl's job is to help you control power states (sleeping / waking / etc.) on your SqueezeCenter server hardware.  To do that, SrvrPowerCtrl needs to be able use some &ldquo;helper&rdquo; applications on your server.  These applications differ according to which operating system you are using on the SqueezeCenter server.  But whatever your server setup, you'll need to do a certain amount of manual tweaking of those helper applications <u>and</u> SrvrPowerCtrl's settings in order to get things working as they ought.  Hopefully, these instructions will help you get everything set &ldquo;just right.&rdquo;</p><br><hr /><br>
+
+<p>WARNING: your server's operating system, which has been identified as <b><i>&ldquo;[% distro %]&rdquo;</i></b>, may not be supported by SrvrPowerCtrl &lsquo;out of the box&rsquo;.
+That said, you <i>may</i> be able to get SrvrPowerCtrl to work with [% distro %].  Your first step will be to determine which system commands supported by [% distro %] are used to execute the following functions:</p>
+
+<li>System shutdown</li>
+<li>System restart</li>
+<li>System suspend</li>
+<li>System hibernate</li><br>
+
+<p>Next, you&rsquo;ll need to determine which user account SqueezeCenter/Squeezebox Server runs under on your operating system.</p>
+
+<p>Next, you&rsquo;ll need to determine how to give that user account permissions to execute those system commands without being prompted for a password.  For unix and linux based OSs, this is usually accomplished through modifications to the /etc/sudoers file.</p>
+
+<p>Finally, you&rsquo;ll need to fix up the command lines on the SrvrPowerCtrl settings page to point to the appropriate system commands.  For many operating systems, you&rsquo;ll need to preface the commands with a &ldquo;sudo&rdquo; or like command so that the system command may be run with the appropriate privileges.</p>
+
+<p>Consult the <a href="/Default/plugins/SrvrPowerCtrl/html/readme.txt" >readme.txt</a> file for details about enabling SrvrPowerCtrl for Windows, RedHat, Debian or MacOSX...whichever one most closely matches your operating system, &ldquo;[% distro %]&rdquo;.</p>
+
+<p>&nbsp;</p>
+
+<hr />
+<table border="0" width="100%">
+<tr>
+<td align="left"><a href="/Default/plugins/SrvrPowerCtrl/html/help.html" >[% "PLUGIN_SRVRPOWERCTRL_BACKTO_HELP_PAGE" | string %]</a></td>
+<td align="center"><a href="/Default/plugins/SrvrPowerCtrl/html/troubleshooting.html" style="float:right;">[% "PLUGIN_SRVRPOWERCTRL_TROUBLESHOOTING_HELP_PAGE" | string %]</a></td>
+<td align="right"><a href="http://code.google.com/p/srvrpowerctrl/" style="text-align:center;">[% "PLUGIN_SRVRPOWERCTRL_HOME_PAGE" | string %]</a></td>
+</tr>
+</table>
+
+</div>
+
+[% PROCESS helpfooter.html %]

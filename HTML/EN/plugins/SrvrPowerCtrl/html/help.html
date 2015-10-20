@@ -1,0 +1,86 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[% PROCESS helpheader.html %]
+
+<style type="text/css">
+<!--
+h1 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:large;
+}
+p {
+	font-size:1.2em;
+}
+li {
+	font-size:1.2em;
+	padding:0em 0em 0em 2.8em;
+	text-indent: -1em;
+}
+
+DIV.bigcode {
+	width: 900px;
+	padding:1em;
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+
+DIV.smallcode {
+	width: 900px;
+	padding: 1em;
+	margin-left:2.8em;
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+-->
+</style>
+
+
+
+<div style="width:80%; margin-left:10%;">
+<p>&nbsp;</p>
+<h3>SrvrPowerCtrl plugin help</h3>
+<p><a href="http://code.google.com/p/srvrpowerctrl/" target="_blank"><img src="images/icon.png" alt="SrvrPowerCtrl" width="84" height="84" hspace="10" align="left" /></a>SrvrPowerCtrl's job is to help you control power states (sleeping / waking / etc.) on your [% sbsservername %] hardware.  To do that, SrvrPowerCtrl needs to be able use some &ldquo;helper&rdquo; applications on your server.  These applications differ according to which operating system you are using on the [% sbsservername %] hardware.  But whatever your server setup, you'll need to do a certain amount of manual tweaking of those helper applications <u>and</u> SrvrPowerCtrl's settings in order to get things working as they ought.  Hopefully, these instructions will help you get everything set &ldquo;just right.&rdquo;</p><br>
+
+<hr /><h3>Setup instructions</h3>
+[% setuplink %]
+
+<hr /><h3>Trouble-shooting SrvrPowerCtrl</h3>
+<p>Please see the <a href="[% webroot %]plugins/SrvrPowerCtrl/html/troubleshooting.html" >trouble-shooting page</a> for initial trouble-shooting tips. Additionally, consult the <a href="[% webroot %]plugins/SrvrPowerCtrl/html/loginfo.html?[% srvrpowerctrl_urlsuffix %]" >SrvrPowerCtrl entries in the server.log</a> to further assist with problems.</p>
+
+<p>Your best source for further help with SrvrPowerCtrl is on the <a href="http://forums.slimdevices.com/showthread.php?t=48521&page=999" target="_blank">SqueezeBox 3rd Party Plugins</a> forum.  This is also where you may report any bugs that you find.</p>
+
+<hr /><h3>Acknowledgements</h3>
+
+<p>This plugin is derived from <a href="http://adrianonline.wordpress.com/" target="_blank">AdrianC's</a> (a.k.a. tenwiseman's) <a href="http://forums.slimdevices.com/showthread.php?t=32674" target="_blank">original Server Power Control plugin.</a><br>His work is what stated this whole ball rolling.<br><br>
+Thanks to bklass for all the jive help.<br><br>
+Also thanks to mavit for the initial sleep button hook.<br><br>
+Also also thanks to peterw for the sleep+hold button hook.<br><br>
+Also also also thanks to raven22 for figuring out the Debian sudoers entries.<br><br>
+Also also also also thanks to Wirrunna and aubuti for being helpful presences on the forum.<br><br>
+Also also also also also thanks to Epoch1970 for many, many crucial ideas.<br><br>
+And finally, thanks to many others who have contributed time and ideas that have helped get SrvrPowerCtrl to where it is today.  Don't be shy about asking me to credit you if you aren't listed above.  I <u>most definitely</u> didn't get it here on my own.
+</p>
+
+
+
+<p>&nbsp;</p>
+<hr />
+<a href="[% webroot %]plugins/SrvrPowerCtrl/html/win-help.html" ><h4>[% "PLUGIN_SRVRPOWERCTRL_WIN_HELP_PAGE" | string %]</h4></a>
+<a href="[% webroot %]plugins/SrvrPowerCtrl/html/unix-help.html" ><h4>[% "PLUGIN_SRVRPOWERCTRL_UNIX_HELP_PAGE" | string %]</h4></a>
+<a href="[% webroot %]plugins/SrvrPowerCtrl/html/mac-help.html" ><h4>[% "PLUGIN_SRVRPOWERCTRL_MAC_HELP_PAGE" | string %]</h4></a>
+<a href="[% webroot %]plugins/SrvrPowerCtrl/html/unsuppos-help.html" ><h4>[% "PLUGIN_SRVRPOWERCTRL_UNSUPPOS_HELP_PAGE" | string %]</h4></a>
+<a href="[% webroot %]plugins/SrvrPowerCtrl/html/troubleshooting.html" ><h4>[% "PLUGIN_SRVRPOWERCTRL_TROUBLESHOOTING_HELP_PAGE" | string %]</h4></a>
+<a href="[% webroot %]plugins/SrvrPowerCtrl/html/loginfo.html" ><h4>[% "PLUGIN_SRVRPOWERCTRL_LOGGING_VIEW_LOG" | string %]</h4></a>
+<hr />
+</div>
+
+[% PROCESS helpfooter.html %]

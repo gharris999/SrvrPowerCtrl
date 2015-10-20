@@ -1,0 +1,169 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[% PROCESS helpheader.html %]
+
+<style type="text/css">
+<!--
+h1 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:large;
+}
+p {
+	font-size:1.2em;
+}
+li {
+	font-size:1.2em;
+	padding:0em 0em 0em .3em;
+	text-indent: -.8em;
+	margin-left:1.5em;
+}
+
+.indented {
+   padding-left: 1.5em;
+}
+
+DIV.bigcode {
+	width: 1200px;
+	padding:1em;
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+
+DIV.smallcode {
+	width: 1200px;
+	padding: 1em;
+/*	margin-left:2em; */
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+-->
+</style>
+
+<script language=javascript>
+function selectNode (node)
+{
+var selection, range, doc, win;
+
+if ((doc = node.ownerDocument) && (win = doc.defaultView) && typeof
+win.getSelection != 'undefined' && typeof doc.createRange !=
+'undefined' && (selection = window.getSelection()) && typeof
+selection.removeAllRanges != 'undefined')
+{
+range = doc.createRange();
+range.selectNode(node);
+selection.removeAllRanges();
+selection.addRange(range);
+}
+else if (document.body && typeof document.body.createTextRange !=
+'undefined' && (range = document.body.createTextRange()))
+{
+range.moveToElementText(node);
+range.select();
+}
+
+}
+
+
+function clearSelection ()
+{
+if (document.selection)
+document.selection.empty();
+else if (window.getSelection)
+window.getSelection().removeAllRanges();
+}
+</script>
+
+
+<div style="width:80%; margin-left:10%;">
+<p>&nbsp;</p>
+<h3>SrvrPowerCtrl plugin setup instructions for Apple OS X</h3>
+<p><a href="http://code.google.com/p/srvrpowerctrl/" target="_blank"><img src="images/icon.png" alt="SrvrPowerCtrl" width="84" height="84" hspace="10" align="left" /></a>SrvrPowerCtrl's job is to help you control power states (sleeping / waking / etc.) on your Squeezebox Server hardware.  To do that, SrvrPowerCtrl needs to be able use some &ldquo;helper&rdquo; applications on your server.  These applications differ according to which operating system you are using on the Squeezebox Server hardware.  But whatever your server setup, you'll need to do a certain amount of manual tweaking of those helper applications <u>and</u> SrvrPowerCtrl's settings in order to get things working as they ought.  Hopefully, these instructions will help you get everything set &ldquo;just right.&rdquo;</p><br><hr /><br>
+
+[% warning %]
+
+<p>To finish installing the plugin for OSX, do the following:<p>
+
+<div class="indented">
+
+<p>Make sure that you are logged into OSX as the same user account that you were using when you installed [% sbsservername %].  This is important.  Additionally, if your account lacks administrative privileges, you'll need to enable them temporarily to finish the SrvrPowerCtrl setup.  Open &lsquo;System Preferences&rarr;Accounts&rarr;My Account&rsquo; and make sure that &lsquo;Allow user to administer this computer&rsquo; is checked.  If it's not, temporarily enable administrative privileges by clicking on the lock and entering an administrative user name and password and then checking the box.  When SrvrPowerCtrl setup is complete, unless your account is the primary administrative account on the computer, you can reverse this process and un-check this option.</p>
+
+<p>Open a terminal window: Click on the Spotlight magnifying glass in the menu bar, type &ldquo;terminal&rdquo; and hit enter.</p>
+
+<p>Do the following: copy and paste this command into the terminal window to make the setup script executable:</p>
+
+<div class="smallcode">#
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+sudo&nbsp;chmod&nbsp;755&nbsp;"[% pluginpath %]/scripts/mac/srvrpowerctrl-setup.sh"
+</span>
+</div>
+
+<p>The sudo command should prompt you for your password.  Next, execute the setup script:</p>
+
+<div class="smallcode">#
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+sudo&nbsp;"[% pluginpath %]/scripts/mac/srvrpowerctrl-setup.sh"
+</span>
+</div>
+
+<p>Finally, we need to verify that your user account now has permission to shutdown the system without raising any password prompts.  We'll do this by running a test script which performs a FAKE shutdown...you system won't actually halt, but we will be able to test to see that permissions have been correctly set.  In the terminal window, try executing the following command:</p>
+<div class="smallcode">#
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+/usr/local/sbin/spc-test.sh
+</span>
+</div>
+
+<p>The sudo command may prompt you for YOUR password, which is appropriate in this case. If the script responds with
+<tt style="font-size:.8em;"> SUCCESS!</tt>, then the plugin ought to be able to shutdown/restart/etc your system from the [% sbsservername %] service.  If, however, the script responds with
+<tt style="font-size:.8em;"> ERROR!</tt>, then something is amiss. If this is the case, try running the setup script again.  Remember, the test script won't actually shutdown your system.</p>
+</div>
+
+<p>If your Mac's role is split between working as a [% sbsservername %] server and working as your desktop computer, you can make life a little easier for yourself by making these configuration changes:</p>
+
+<div class="indented">
+
+<p>First off, disable automatic login.  Use <i>System Preferences&rarr;Accounts&rarr;Login Options</i> to do this. </p>
+
+<p>Next, execute the following code in a terminal window:</p>
+
+<div class="smallcode">#
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+sudo "[% pluginpath %]/scripts/MacOSX/autoblock-enable.sh"
+</span>
+</div>
+
+<p>The above script sets up &ldquo;hooks&rdquo; so that whenever you log into your Mac, SrvrPowerCtrl gets automatically &ldquo;blocked&rdquo;, i.e. temporarily disabled.  This makes sure that SrvrPowerCtrl doesn't put your system to sleep right when you're in the middle of doing some important work. Once you log off, the block gets automatically cleared and SrvrPowerCtrl can go back to doing it's job.  Note: you'll need to enable this feature for each user on your system by logging in under each account and running the autoblock-enable.sh script.<p>
+
+<p>To remove the login/logout &ldquo;hooks&rdquo;, execute:</p>
+
+<div class="smallcode">#
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+sudo "[% pluginpath %]/scripts/MacOSX/autoblock-disable.sh"
+</span>
+</div>
+</div>
+
+<p><br>Finally, if you'd prefer to make all your OSX system settings changes manually (rather than using the above setup scripts) please consult the <a href="/Default/plugins/SrvrPowerCtrl/html/readme.txt" >readme.txt</a> file for steps you'll need to carry out.</p>
+
+<p>&nbsp;</p>
+
+<hr />
+<table border="0" width="100%">
+<tr>
+<td align="left"><a href="/Default/plugins/SrvrPowerCtrl/html/help.html" >[% "PLUGIN_SRVRPOWERCTRL_BACKTO_HELP_PAGE" | string %]</a></td>
+<td align="center"><a href="/Default/plugins/SrvrPowerCtrl/html/troubleshooting.html" style="float:right;">[% "PLUGIN_SRVRPOWERCTRL_TROUBLESHOOTING_HELP_PAGE" | string %]</a></td>
+<td align="right"><a href="http://code.google.com/p/srvrpowerctrl/" style="text-align:center;">[% "PLUGIN_SRVRPOWERCTRL_HOME_PAGE" | string %]</a></td>
+</tr>
+</table>
+
+</div>
+
+[% PROCESS helpfooter.html %]

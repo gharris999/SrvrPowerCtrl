@@ -1,0 +1,715 @@
+==================================================================================
+What's new: 201200709
+==================================================================================
+1). Formally incorporated logon session and samba lock detection into Stats.pm.
+    Added new check boxes to the settings page to make these checks optional.
+    Thanks to user Blondie for inspiring this change.
+
+2). Unified the Redhat and Debian support scripts into a single 'unix' directory.
+    Updated help system to reflect this change.
+
+2). Extensive rewrite of the unix/linux bash support scripts.  Many common helper functions
+    can now be found in spc-functions.sh
+
+==================================================================================
+What's new: 20120427
+==================================================================================
+1). Updated Util::SystemExecCmd() to correctly interpret return code of perl
+    system command.  Thanks to epoch1970 for pointing this out.
+
+2). Added new spc-checkidle.sh custom idle check script example to the Debian
+    scripts.  This script will inhibit idle suspends when users are logged into
+    the system.  Thanks to user Blondie for suggesting this.
+
+3). Cleaned up Debian, Redhat and Mac install scripts.
+
+4). Added optional wake on crontab functionality.  SrvrPowerCtrl will now wake
+    the system for scheduled root crontab events.
+
+==================================================================================
+What's new: 20111028
+==================================================================================
+1). Changed debian & redhat setup scripts to not make assumptions about sbs user
+    account name.
+
+2). Added support for block files in /run/lock
+
+==================================================================================
+What's new: 20110601
+==================================================================================
+1). Fixed a bug in Menu.pm that was preventing the Reboot command from appearing
+    on menus.
+
+==================================================================================
+What's new: 20110515
+==================================================================================
+1). Fixed a recently introducted bug in the IP3K menu handling.
+
+2). Added a setup check for debian systems.  Only default the Set RTC wakealarm
+    command time format for hardware clock == local time if a Gnome GUI
+    is detected.  If a machine is running headless, assume that the hwclock is
+    UTC.
+
+==================================================================================
+What's new: 20110417
+==================================================================================
+1). Added support for "hidden" custom commands.  If a custom command's label
+    begins with a ".", then the command will be hidden on player and the web
+    menus, but the command will be available as an action item in the settings.
+
+2). If a custom command whose label == ".autoexec" exists, that command will be
+    executed on plugin startup, i.e. when SBS first starts.  The ".autoexec"
+    custom command gets executed 30 seconds after the "On Wakeup: Seconds to
+    wait before trying to restore" value.  I.e. the ".autoexec" command will be
+    executed AFTER players are fetched back from mysb.com and after syncgroups
+    have been reestablished.
+
+==================================================================================
+What's new: 20110413
+==================================================================================
+1). Made the 'Specific players to switch' pref more flexible. Can now use either
+    player names or a player MACs in that field.
+
+2). Tried to make some of the log entries seem a little less ominous.
+
+3). Added prefs display on the loginfo.html page.
+
+==================================================================================
+What's new: 20110407
+==================================================================================
+1). Easier / more obvious method disabling of system idle monitor now available
+    on the settings page.
+
+2). New facilities to aid in troubleshooting:  Ability to set the SrvrPowerCtrl
+    log level from the bottom of the settings page.  Also, provided a link there
+    to a new page showing the SrvrPowerCtrl log entries from the server.log.
+
+    Also on that log page, a button to send an email problem report.
+
+3). Several new CLI commands, again, to support troubleshooting:
+
+    srvrpowerctrl setpref prefname value
+
+    srvrpowerctrl getpref prefname
+
+    srvrpowerctrl dumpprefs [/path/to/prefs/dump/file.prefs]
+
+    srvrpowerctrl setloglevel [LEVEL] [PERSIST]
+
+    srvrpowerctrl dumplog [/path/to/dump/file.log]
+
+    srvrpowerctrl zipdata [/path/to/prefs/and/logs/data.zip]
+
+    In every case, where a CLI command takes an optional file path parameter,
+    the file path must point to a location where the squeezeboxserver user has
+    write permissions, e.g. '/tmp' or '/var/log/squeezeboxserver'.
+
+
+==================================================================================
+What's new: 20110322
+==================================================================================
+1). At Roger the Shrubber's suggestion, added a 'softblock' option.  If a block
+    file is created which contins just the phrase 'softblock', then the block file
+    is visible only to the System-Idle and End-Of-Day monitors.  This allows you
+    to block the idle monitors without blocking the user menu initiated actions.
+
+    The same mechanism works with 'memory blocks' set from the CLI:
+
+    srvrpowerctrl setblock message softblock
+
+    ..creates a soft memory block that, again, allows user actions through
+    the menu but blocks the idle monitors.
+
+    You can add a "hidden" pref to the srvrpowerctrl.prefs file:
+
+    bUseSoftBlocks: 1
+
+    ..which will result in blocks set via the menu system to be 'softblocks'.
+
+==================================================================================
+What's new: 20110321
+==================================================================================
+1). At mvordeme's suggestion, added a "Unsync players before switching to
+    alternate server?" option to the Alternate Server settings.  Players are not
+    necessarily well behaved if they are pushed onto mysb.com while synced.
+    This option causes the players to be unsynced before they are pushed to the
+    alternate server and, on wake-up when players are fetched back, resynced.
+
+==================================================================================
+What's new: 20110319
+==================================================================================
+1). Added a 'No Action' action.  This is potentially useful, e.g., in a situation
+    where you'd like the server to be awake for a specific time-range during the
+    day.  In that case, you can set the End-Of-Day start and end times to
+    correspond to the desired awake period and then set the EOD action
+    to 'No Action'.  SrvrPowerCtrl treats the EOD start-time as an alarm
+    and automatically schedules a rtc-wakealarm.  Once the server has resumed
+    and entered the EOD period, SrvrPowerCtrl then 'takes no action' during
+    the whole EOD period.  Regular idle monitoring resumes at the end of the
+    EOD interval.  If you set the EOD idle-time-out to 0, SrvrPowerCtrl will
+    perform a less-strict idle check each minute and fewer resources will be
+    consumed.
+
+2). Cleaned up the player display code to better support the Touch, Radio and
+    Boom.  Added a EOD check to the player display code.  Messages initiated
+    by actions that happen during the EOD period display at the 'powerOff'
+    brightness.
+
+3). Added code to correct for 'timer drift'.  This should make SrvrPowerCtrl's
+    check for EOD start and end happen closer to the actual times.
+
+4). Redesigned a portion of the settings page.  Removed some strings from
+    strings.txt. Settings page now loads much faster.
+
+5). Changed the 'Restart Server' label and 'restart' cli action to 'Reboot Server'
+    and 'reboot'.
+
+6). Other minor changes to strings.txt
+
+7). Fixed a minor bug that broke compatibility with SC 7.3.4
+
+
+==================================================================================
+What's new: 20110313
+==================================================================================
+1). Expanded SrvrPowerCtrl's system idle monitoring to include optional network
+monitoring. On Linux and OSX, added disk and cpu load monitoring as well.
+
+Why?  Squeezebox server 7.6 now includes a DLNA plugin.  This will allow the
+streaming of audio (and video?) to non Squeezebox clients.  Current idle
+player monitoring would not detect this sort of "playing".  But if we keep track
+of network I/O, we can detect this activity.  On SrvrPowerCtrl's settings page,
+there are now sliders which can adjust the idle detection threshold for network,
+disk and CPU loads.  To disable a monitor, set its threshold to 0.  For DLNA
+streaming of compressed content, like MP3 streams, you'll need to set the
+threshold fairly low, e.g. 1024 kb/minute.  As it stands, the SBS DLNA plugin
+will transcode lossless content into MP3 before streaming to many DLNA clients.
+As of this moment, the SBS DLNA plugin doesn't serve up video, but that may be
+in the works.  However, if you run another DLNA server which WILL serve up
+video, e.g. mediatomb or minidlna in parallel with SBS, SrvrPowerCtrl will
+now clue into the fact that *something* is exercising the network interface
+and will declare the system *not idle* if the threshold is exceeded.  If all
+you'll be streaming to DLNA clients is video, you can set the threshold higher,
+say to 8196 kb/min for M4V content.
+
+These new monitoring features were inspired by code from epoch1970, who has
+been the source for many of SrvrPowerCtrl's better features.
+
+2). Expanded SrvrPowerCtrl's ability to push players onto mysqueezebox.com on
+shutdown/suspend/etc. so that now, another local server can be specified
+instead of mysb.com.  Additionally, SrvrPowerCtrl will request that the
+alternate server switch the player 'off' once it arrives if the
+'Power-off attached players when shutting down?' option is set.
+
+Why?  The Squeezebox Touch, running "tinysc" makes a great, ultra low power
+server.  All you need to do to enable the embedded SBS on a SBTouch is to plug
+a cheap SD card into its card reader.  You don't even need to put any content
+on the SD card.  If you select the Touch as the "Alternate Server" to push
+players onto when SrvrPowerCtrl actions are performed, your IP3K based players
+(SB Classic, Transporter) will continue to display their "off" clocks.  When
+you re-awaken your server, SrvrPowerCtrl will fetch the players back again.
+
+With this change comes some changes to SrvrPowerCtrl's CLI interface.  The old
+cli command 'gotosn' has now become 'pushtoas' (for push-to-alternate-server)
+and the fetch back command is 'pullfromas'.
+
+3). Expanded the processing of the 'Players to switch' and the 'Players to
+restore' settings.  Now, if you prefix a player's mac address with an
+exclamation point !, SrvrPowerCtrl will *ignore* that player when pushing
+or fetching from mysb.com or the alternate server.  Coupled with the 'Push
+ALL Players' option, this allows you to specify *all except*..
+
+4). Full support for the SBTouch and the SBRadio.  When SBS 7.4 debuted,
+SrvrPowerCtrl lost the ability to fetch SqueezePlay based SB Hardware back from
+mysqueezebox.com.  I've now figured out a way to work around mysb.com's bug so
+that SrvrPowerCtrl can now fetch these players back.
+
+5). Expanded and made more flexible the custom command settings.  You are no
+longer limited to just 4 custom commands.  You may now define as many as you
+wish.  You may execute your custom commands via the cli with:
+
+srvrpowerctrl customcmd0
+
+srvrpowerctrl customcmd1
+
+srvrpowerctrl customcmd2
+
+..etc.
+
+6). Changed End-Of-Day behavior.  Now, if you have a Custom end-of-day action
+command defined for EOD and if you've set the EOD idle time-out to zero,
+SrvrPowerCtrl will execute the custom command...as you would expect.  However,
+if your custom command reboots your server or otherwise restarts SBS,
+SrvrPowerCtrl, the '2nd time through' will instead execute the EOD 'Action to take
+after idle time' selected from the drop-down list.  So, for instance, if your
+custom EOD action script stops SBS, updates and then reboots your server, on
+wake-up SrvrPowerCtrl will then execute the listed action, e.g. 'Suspend'.
+This allows you to program your server to do it's nightly chore list and then
+have SrvrPowerCtrl sleep the machine immediately upon conclusion.
+
+
+
+==================================================================================
+What's new: 20101129
+==================================================================================
+Added 2 new cli commands:
+
+srvrpowerctrl getwakealarm [%d|%l|%f] [%t]
+
+  This request reports the time the system's rtc wakealarm should be
+  programmed for in order to wake the system for SBS to service
+  the next enabled alarm.
+
+  with no args, returns wakealarm:1291128900 (e.g. epoch time)
+  with %d, returns: wakealarm:1291128900 (e.g. epoch time)
+  with %d, returns: wakealarm:1291103700 (e.g. local time)
+  with %f %t, rets: wakealarm:11/30/2010 07:55:00
+
+  If there are no pending alarms, getwakealarm returns: wakealarm:0.
+
+  Note: This call does not actually program the system RTC waketime, only
+  reports what it ought to be set to.
+
+
+srvrpowerctrl setwakealarm [epoch_time] [who's_calling]
+
+  This request will execute the schedule wakeup command from the SrvrPowerCtrl
+  settings.  If no args are included in the request, the rtc is programmed to
+  wake the system to service the next enabled alarm.
+
+  If the optional epoch_time arg is included in the request, the rtc wakealarm
+  is programmed to that time.
+
+These new cli commands are intended to facilitate situations where SrvrPowerCtrl
+is NOT used as the primary power manager.  If you can hook your system's sleep
+event with a script, the setwakealarm cli command can be called to ensure that
+the system wakes up in time for SBS to service the next alarm. For best results,
+call setwakealarm with an epoch_time value of "0" and the who's_calling value
+of "system".
+
+For example, on a linux system with pm-utils installed, the following script
+would use SrvrPowerCtrl's setwakealarm cli command to program the RTC whenever
+the system went into sleep or hibernation:
+
+/usr/lib/pm-utils/22srvrpowerctrl:
+---------------------------------------------
+#!/bin/sh
+#
+# Let SrvrPowerCtrl decide when the system
+# should wake up..
+
+set_rtc_wakealarm() {
+    nc 127.0.0.1 9090 <<EOF
+srvrpowerctrl setwakealarm 0 system
+exit
+EOF
+}
+
+case $1 in
+    hibernate|suspend)
+        set_rtc_wakealarm
+        ;;
+    thaw|resume)
+        ;;
+    *) exit $NA
+        ;;
+esac
+---------------------------------------------
+A similar approach could be taken with OSX using "SleepWatcher" from
+http://www.bernhard-baehr.de/
+
+
+==================================================================================
+What's new: 20091028
+==================================================================================
+Fixed some bugs that show up when running under SC 7.3.x introducted with some
+recent changes.
+
+Added 3 new cli commands:
+
+srvrpowerctrl getidlecount
+retuns: idlecount:n
+        eodcount:n
+
+srvrpowerctrl getidlecountdown
+returns: idlecountdown:n
+         eodcountdown:n
+
+
+srvrpowerctrl setidlecount i e
+sets the idletimeout count to i
+sets the eodtimeout count to e
+retuns: idlecount:n
+        eodcount:n
+
+srvrpowerctrl resetidlecount
+sets the idletimeout count to 0
+sets the eodtimeout count to 0
+retuns: idlecount:n
+        eodcount:n
+
+
+==================================================================================
+What's new: 20091017
+==================================================================================
+Support for CLI processing in commands:
+
+Any command line beginning with 'cli://' in the prefs now gets handed off to SBS's
+cli interface rather than being executed as a system command.
+
+Support for custom commands:
+
+The settings page now has 'slots' for up to 4 hd-hoc custom commands that will show
+up on SrvrPowerCtrl's menus.  You can specify any menu label and system or cli
+command for each of the 4 'slots'.  Additionally, you can specify multiple
+cli commands on the same 'line' by separating them with '&&'.
+
+How is this useful?  There are still some SBS functions that you can't initiate
+from the SBC/Touch/SqueezePlay interface, e.g. initiating a database scan.  For
+these and other functions, SrvrPowerCtrl now gives you a way to tack these
+functions onto SrvrPowerCtrl's menu.  Any system command or script (that the
+squeezeboxserver user has OS permissions to run) or any straight-forward CLI
+command (i.e. ones that don't require a CLI 'conversation') will work here.
+
+Examples:
+
+Label:      Scan for new music
+Command:    cli://rescan
+
+Label:      Scan playlists
+Command:    cli://rescan playlists
+
+Label:      Wipe and rescan
+Command:    cli://wipecache
+
+Label:      Abort scan
+Command:    cli://abortscan
+
+Label:      Play random French Baroque albums
+Command:    cli://04:20:00:12:23:45 playlist clear&&04:20:00:12:23:45 randomplaygenreselectall 0&&04:20:00:12:23:45 randomplaychoosegenre French%20Baroque 1&&04:20:00:12:23:45 randomplay albums
+
+
+
+
+==================================================================================
+What's new: 20090814
+==================================================================================
+Change in wake-for-EOD behavior.  SrvrPowerCtrl now will wake the server for EOD
+actions only if the EOD-on-idle action is a custom script OR if the EOD-on-idle
+action differs from the regular on-idle action.  This new behavior is useful if
+you want to have the EOD action the same as the regular on-idle action but want
+to have the EOD on-idle time-out shorter (or longer) than the regular on-idle
+timeout.  In this scenario, SrvrPowerCtrl no longer will (uselessly) wake your
+server for the EOD action.
+
+
+Examples:
+
+1). You have EOD monitoring enabled and you've specified a custom script as the
+    EOD action.  SrvrPowerCtrl always schedules a server wake-up for your EOD
+    action.
+
+2). You have EOD monitoring enabled and you've set the EOD action to 'Hibernate'
+    and you've set the regular non-EOD on-idle action to 'Suspend'.  SrvrPowerCtrl
+    will schedule a server wakeup to bring the server out of suspend and into
+    hibernation.
+
+3). You have EOD monitoring enabled and the EOD action == the regular on-idle
+    action.  SrvrPowerCtrl will NOT wake the server for the EOD action.
+
+Thanks to rickwookie for inspiring this change.
+
+
+
+==================================================================================
+What's new: 20090701
+==================================================================================
+
+New settings option: Push players to SqueezeNetwork on *external* shutdown [X]
+
+This option allows players to be pushed to SqueezeNetwork when SqueezeCenter
+is stopped or the server is shutdown by an "external" cause, i.e. NOT by
+SrvrPowerCtrl.  With this option set, an external shutdown event -- like
+shutting down the server by pressing its power button -- will send your
+players to SN.
+
+In a similar vein, SrvrPowerCtrl now automatically schedules server wake up (if
+so enabled) and turns off players (if enabled) when it detects an "external"
+shutdown.
+
+Thanks to fredbloggs for inspiring this feature.
+
+The return of 'defer action while sleep-playing':  If you initiate a SrvrPowerCtrl
+action while sleep-playing (e.g. shutdown/suspend/etc) the action will be deferred
+until the end of sleep-playing.  This happens automatically now.  There is no
+setting to enable this.  If you cancel sleep-playing, the 'cued up' action is
+canceled too.
+
+==================================================================================
+What's new: 20090614 - Final release candidate (???)
+==================================================================================
+
+Full support for Mac OSX! Sleep, hibernate, wakeup, everything.  See the OSX
+setup help web page (from settings) for info.
+
+Extension downloader support:  Add http://srvrpowerctrl.googlecode.com/svn/repo.xml
+to the list of Additional Repositories in the Extension downloader plugin settings.
+
+New 'Not Idle' command: If this custom command is configured on the settings page,
+SrvrPowerCtrl will call the indicated script once per minute.  This is potentially
+useful if you are using other power management packages and need to communicate a
+"busy" signal to it.  Experiment with this feature by trying a benign command, e.g.:
+
+ sudo /usr/bin/logger SrvrPowerCtrl not idle
+
+To disable this feature, just leave the command empty in the settings.
+
+SrvrPowerCtrl now automatically schedules server wakeups if a library rescan is
+scheduled via the SqueezeCenter Rescan Music Library plugin.  Thanks to mvordeme
+for prompting this change.
+
+SrvrPowerCtrl no longer attempts to push SBCs in audio playback mode to SqueezeNetwork
+if the "Swtich ALL players when switching to SqueezeNetwork?" setting is enabled.
+Again, thanks to mvordeme for prompting this change.
+
+On Linux and OSX, the helper scripts have been renamed.  The scripts are now:
+
+/usr/local/sbin/spc-wakeup.sh
+/usr/local/sbin/spc-restart.sh (linux only)
+/usr/local/sbin/spc-sleep.sh (OSX only)
+/usr/local/sbin/spc-hibernate.sh (OSX only)
+
+More features are now tuned on by default in the settings.  E.g. Sleep-Monitoring,
+SCRestart, etc.
+
+Users upgrading to this version should delete the old SrvrPowerCtrl directory
+as well as the srvrpowerctrl.prefs file.  Then try installing this new version
+using the Extension Downloader.  Finally, run the setup script for your operating
+system (Debian, Redhat, OSX) to copy the helper scripts to the correct location
+and to update the /etc/sudoers file.  See the SqueezeCenter->Settings->Plugins->
+SrvrPowerCtrl Settings page for a link to the help file and for instructions
+as to how to complete your setup.
+
+
+==================================================================================
+What's new: 20090505
+==================================================================================
+
+More tweaks to the webUI...mostly cosmetic and some "under the hood" changes.
+
+Confirmation messages: the SrvrPowerCtrl webUI will now confirm that an action
+has taken place, e.g. "Server has shut down".  These messages are cosmetic only.
+The web browser doesn't *really* know if the server has shut down.
+
+For the "2SN" actions, SrvrPowerCtrl will redirect your web browser to
+SqueezeNetwork.  If you want to inhibit that behaviour, add the line:
+
+bNoWebUIRedirect2SN: 1
+
+to the srvrpowerctrl.prefs file.
+
+The SrvrPowerCtrl web pages now ought to be a little better behaved when using
+other than the default skin and with browsers with javascript disabled.
+
+Also, the linux default directory for helper scripts has been changed to
+/usr/local/sbin.  You may need to run the setup script again to copy the
+helper scripts to the correct location.  Then, go to the Settings->Plugins->SrvrPowerCtrl
+settings page and click on the "Set defaults" link on the bottom of the page
+to reset the settings to the new defaults.  Make sure you copy down any
+pm-suspend quirks you may be using and reapply those after resetting to
+the defaults.
+
+
+==================================================================================
+What's new: 20090501
+==================================================================================
+
+Tweaks to the webUI.
+
+Bug fixes:
+
+Fixed CSRF violation on webUI action page refresh for Firefox & IE.
+
+
+==================================================================================
+What's new: 20090420
+==================================================================================
+
+Bug fixes:
+
+The "to SqueezeNetwork" actions really, really work again.  Thanks to rickwookie
+and aubuti for spotting this.
+
+Prompts, warnings & feedback displays on players and SBC are more or less fixed.
+
+Various code clean-ups.
+
+
+
+==================================================================================
+What's new: 20090419
+==================================================================================
+
+Bug fixes:
+
+The "to SqueezeNetwork" actions work again.  Thanks to rickwookie for spotting this.
+
+Attempting to set a block from the web page after having set a block from another
+client (SBC, iPeng) no longer causes an endless web page refresh loop.  Thanks to
+Wirrunna for spotting this.
+
+
+==================================================================================
+What's new: 20090417
+==================================================================================
+
+New Feature:
+
+SrvrPowerCtrl now (optionally) appears on the SqueezeCenter home page extras
+menu.  Now you can control your server's power states via your web browser.
+
+Check the "Include menu options on Web Interface" option in the settings.
+
+With this setting enabled, a "Server Power Contol" entry shows up on SqueezeCenter's
+web interface home page "Extras" menu.  Any of the basc commands that are enabled
+are now available through the web interface.  Thanks to indifference_engine for
+suggesting this.
+
+Block files: block files can now be cleared from the CLI (clearblock) and from
+the web UI.  On linux systems, you must give the squeezecenter user ownership
+of the block file and also write permissions to /var/lock.
+
+Alarm wakup: for linux systems whose hardware clocks are set to local time (the
+default for Ubuntu 8.10 and later) you can now call the /usr/bin/scwakeup.sh script
+with a "%l" parameter.  This %l parameter will feed scwakeup.sh with the correct
+wakeup time, i.e. epoch time fixed up for the local tz offest.
+
+
+==================================================================================
+What's new: 20090406
+==================================================================================
+
+Defer while sleeping feature removed.  'End of Sleep Timer' action now takes
+its place.
+
+'End of Sleep Timer' action is now "cancel sleep" aware.
+
+Default log setting is now INFO.  INFO level tries to report just actions taken.
+
+Bug fixes for linux setup scripts.
+
+Help pages tweaked.
+
+==================================================================================
+What's new: 20090303
+==================================================================================
+
+New 'End of Sleep Timer' action:
+
+	SrvrPowerCtrl can now monitor players and watch for "sleep-playing"..
+	at the conclusion of which, SrvrPowerCtrl can automatically take
+	action, i.e. shutdown/suspend/etc.
+
+New Help page linked from settings page.
+
+	Hopefully, this will inspire less head-scratching rather than more.
+
+New Debian - Ubuntu setup script.
+
+	Now, finishing SrvrPowerCtrl setup on Debian or Ubuntu servers
+	should be as easy as on Redhat, Fedora, etc.
+
+
+Refinements to push 'n pull from SqueezeNetwork.
+
+	There is now a 'Swtich ALL players to SqueezeNetwork' option to switch
+	ALL players over to SqueezeNetwork when initiating a 'Suspend to
+	SqueezeNetwork' from a player menu.  If you have 'Suspend to SqueezeNetwork'
+	selected as the idle player or EOD action, the behavior hasn't changed:
+	ALL players always get switched over in this case.
+
+	Also, there is now a "Specific players to switch to SqueezeNetwork" setting.
+	This setting takes a list of player mac addresses.  Only players in the list
+	get switched to SN.
+
+	'Restore SqueezeNetwork connected players on wakeup' now behaves a little
+	differently.  If you are using the 'Specific players to restore' feature,
+	it still will only drag back those specific players.
+
+	Also, SrvrPowerCtrl now 'remembers' which players it pushed onto SN before
+	shutting down/suspending/etc.  Upon resume, it only drags back the players
+	it had previously 'pushed'.
+
+	Example:
+
+	Player A is connected to SqueezeNetwork, playing music.
+	Player B is connected to the local server and someone initiates a
+	"Suspend to SqueezeNetwork" from Player B.  The next time the server
+	resumes, only Player B will get dragged back from SqueezeNetwork.
+
+	Exception: if Player A has the next scheduled alarm, it will get
+	dragged back too.
+
+Refinements to Restart SqueezeCenter:
+
+	This feature now works on windows.  It requires the
+	StartHidden.exe utility which is now included in the
+	SCPowerTool zip distribution.
+
+
+
+==================================================================================
+What's new: 20090120
+==================================================================================
+
+Regime change: 'Nuff said.
+
+
+==================================================================================
+What's new: 20090101
+==================================================================================
+
+New power control utility for Windows.
+
+        This version introduces a new Windows utility: SCPowerTool.exe. This
+        utility replaces psshutdown.exe as the method of shutting down/sus-
+        pending/hibernating the server. SCPowerTool.exe also has some other
+        features, including: ability to wake the server up at a specific time;
+        ability to keep the server "alive" when it would otherwise slip back
+        into standby. (Addresses the dreaded "Windows suspends again two minutes
+        after WOL" problem.)
+
+
+Alarms:
+
+        SrvrPowerCtrl now determines when the next SqueezeCenter alarm is due
+        and will schedule the server to wake up at the appropriate time. On
+        Linux systems, SrvrPowerCtrl uses a helper shell script to program the
+        RTC to wakeup the system. On Windows, SrvrPowerCtrl uses SCPowerTool.exe
+        to wake the system up from standby or hibernation. Alternately,
+        SrvrPowerCtrl can use the WakeupOnStandBy utility available at
+        www.dennisbabkin.com/wosb.
+
+
+Return from suspend:
+
+        SrvrPowerCtrl now knows when the system has woken up from suspend or
+        hibernation. On wakeup, SrvrPowerCtrl will (if set to do so) now drag
+        back any players connected to SqueezeNetwork. Also, it will execute a
+        configurable "on resume" command. On Windows systems, this command
+        should be SCPowerTool.exe invoked in such a way as to keep the system
+        "alive" for 20 - 40 minutes.
+
+
+Blocking:
+
+        SrvrPowerCtrl actions can now be blocked through two new mechanisms:
+
+        1). on Linux systems, a block file at /var/lock/sc-block will prohibit
+            SrvrPowerCtrl from taking any action.
+
+        2). If the idle or end-of-day monitors are active, new menu items
+        appear allowing you to set a block via the remote or the SBC.
+
+        Also, SrvrPowerCtrl now checks to see if any connected players are or need
+        firmware updating and will block on this condition.

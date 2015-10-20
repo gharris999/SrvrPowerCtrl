@@ -1,0 +1,117 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[% PROCESS helpheader.html %]
+
+<style type="text/css">
+<!--
+h1 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:large;
+}
+p {
+	font-size:1.2em;
+}
+li {
+	font-size:1.2em;
+}
+DIV.smallcode {
+	width: 1200px;
+	padding: 1em;
+	margin-left:2.8em;
+	overflow-x: auto;
+	background-color: #ffffc6;
+	font-family: "Courier", "Fixed";
+	font-size:1em;
+}
+-->
+</style>
+<script language=javascript>
+function selectNode (node)
+{
+var selection, range, doc, win;
+
+if ((doc = node.ownerDocument) && (win = doc.defaultView) && typeof
+win.getSelection != 'undefined' && typeof doc.createRange !=
+'undefined' && (selection = window.getSelection()) && typeof
+selection.removeAllRanges != 'undefined')
+{
+range = doc.createRange();
+range.selectNode(node);
+selection.removeAllRanges();
+selection.addRange(range);
+}
+else if (document.body && typeof document.body.createTextRange !=
+'undefined' && (range = document.body.createTextRange()))
+{
+range.moveToElementText(node);
+range.select();
+}
+
+}
+
+
+function clearSelection ()
+{
+if (document.selection)
+document.selection.empty();
+else if (window.getSelection)
+window.getSelection().removeAllRanges();
+}
+</script>
+
+
+<div style="width:80%; margin-left:10%;">
+<p>&nbsp;</p>
+<h3>SrvrPowerCtrl plugin Windows setup instructions</h3>
+<p><a href="http://code.google.com/p/srvrpowerctrl/" target="_blank"><img src="images/icon.png" alt="SrvrPowerCtrl" width="84" height="84" hspace="10" align="left" /></a>SrvrPowerCtrl's job is to help you control power states (sleeping / waking / etc.) on your [% sbsservername %] hardware.  To do that, SrvrPowerCtrl needs to be able use some &ldquo;helper&rdquo; applications on your server.  These applications differ according to which operating system you are using on the [% sbsservername %] hardware.  But whatever your server setup, you'll need to do a certain amount of manual tweaking of those helper applications <u>and</u> SrvrPowerCtrl's settings in order to get things working as they ought.  Hopefully, these instructions will help you get everything set &ldquo;just right.&rdquo;</p><br><hr /><br>
+
+[% warning %]
+
+<p>To finish installing SrvrPowerCtrl for windows, you'll need to <a href="http://srvrpowerctrl.googlecode.com/files/SCPowerTool_latest.exe"><b>download the SCPowerTool setup file</b></a> from the <a href="http://code.google.com/p/srvrpowerctrl/downloads/list" target="_blank">SrvrPowerCtrl project downloads page</a>.  After you've downloaded the file, run SCPowerTool_latest.exe.  On Windows Vista and Windows 7, the system will prompt you for permission to allow the setup program to modify your system.  The only modification that the setup program makes to your system is to copy three files (SCPowerTool.exe, SCCLITool.exe and StartHidden.exe) into your system directory.  That's it.  No changes are made to your system registry or to any other settings.  With SCPowerTool.exe installed to your system directory, SrvrPowerCtrl now has everything that it needs in order to manage power states on your server.</p>
+
+<p>Alternatly, you may download a <a href="http://srvrpowerctrl.googlecode.com/files/SCPowerTool_latest.zip"><b>zipped copy of SCPowerTool and the other utilities</b></a>, which includes full source code and some example scripts.  To install SCPowerTool.exe from the zip file, unzip the file and copy SCPowerTool.exe and StartHidden.exe to somewhere in your path, e.g. <tt>C:\Windows\System32</tt>.</p>
+
+<p>SCPowerTool.exe is called by SrvrPowerCtrl and is the utility that does the actual &ldquo;heavy lifting&rdquo; in terms of shutting-down / suspending / hibernating  and waking up the system.  StartHidden.exe is a semi-tricky application that allows SrvrPowerCtrl to get SqueezeCenter 7.3.x to restart itself.  It is not used with Squeezebox Server 7.4 and later.  SCCLITool.exe is a Squeezebox Server &lsquo;helper utility&rsquo; whose job is to allow you to write batch files that can &lsquo;talk&rsquo; to Squeezebox Server via SBS's CLI facility.</p>
+
+<p>We need to make sure that the SCPowerTool.exe command operates on your system.</p>
+
+<p>With Windows XP, try: Start&rarr;Run:</p>
+
+<div class="smallcode">
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+   cmd /C start /B SCPowerTool.exe --standby --wakeup=-60
+</span>
+</div>
+
+<p>On Windows Vista and Windows 7, try: Start and type into the search box:</p>
+<div class="smallcode">
+<span onmouseover="selectNode(this)"; OnMouseOut="clearSelection(this);">
+   cmd /C start /B SCPowerTool.exe --standby --wakeup=-60
+</span>
+</div>
+<p>..and press Enter.</p>
+
+
+<p>That command should send your system into standby and then wake it back up again after 60 seconds.</p>
+
+<p>Assuming that that command worked, you can reboot your server or restart the [% sbsservername %] service to activate SrvrPowerCtrl.</p>
+
+<p>&nbsp;</p>
+
+<hr />
+<table border="0" width="100%">
+<tr>
+<td align="left"><a href="/Default/plugins/SrvrPowerCtrl/html/help.html" >[% "PLUGIN_SRVRPOWERCTRL_BACKTO_HELP_PAGE" | string %]</a></td>
+<td align="center"><a href="/Default/plugins/SrvrPowerCtrl/html/troubleshooting.html" style="float:right;">[% "PLUGIN_SRVRPOWERCTRL_TROUBLESHOOTING_HELP_PAGE" | string %]</a></td>
+<td align="right"><a href="http://code.google.com/p/srvrpowerctrl/" style="text-align:center;">[% "PLUGIN_SRVRPOWERCTRL_HOME_PAGE" | string %]</a></td>
+</tr>
+</table>
+
+</div>
+
+[% PROCESS helpfooter.html %]

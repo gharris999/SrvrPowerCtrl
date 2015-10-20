@@ -1,0 +1,403 @@
+[% PROCESS settings/header.html %]
+
+<script language=javascript>
+function resetsettings () {
+	window.location = "[% webroot %]plugins/SrvrPowerCtrl/settings/basic.html?resetSettings=1";
+}
+</script>
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_BASIC_SETTINGS" desc="" %]
+		<img src="/Default/plugins/SrvrPowerCtrl/html/images/icon.png" alt="SrvrPowerCtrl" width="56" height="56" align="right" />
+		<div class="prefDesc" style="padding-right:30%">[% "PLUGIN_SRVRPOWERCTRL_BASIC_SETTINGS_HEADER" | string %]</div>
+		<br>[% srvrpowerctrl_warn %]<a href="/Default/plugins/SrvrPowerCtrl/html/helpredir.html" target="_blank">[% "PLUGIN_SRVRPOWERCTRL_HELP_PAGE" | string %]</a>&nbsp;&nbsp;&nbsp;
+
+
+	[% END %]<hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_BASIC_COMMANDS" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SHUTDOWN_CMD" desc="PLUGIN_SRVRPOWERCTRL_CMD_DESC" %] &nbsp;
+			<div style="margin-top:-18px; margin-bottom:-18px;">
+			<table cellspacing=8 >
+				<tr>
+					<td valign="top">
+						<input type="text" class="stdedit" name="pref_szShutdown_cmd" id="szShutdown_cmd" value="[% prefs.pref_szShutdown_cmd | html_entity %]" size="50">
+					</td>
+					<td valign="top" style="width:80px">
+						<input name="pref_bInclude_Shutdown" type="checkbox" [% IF prefs.pref_bInclude_Shutdown %] checked ] [% END %] >&nbsp;[% "PLUGIN_SRVRPOWERCTRL_INCLUDESHUTDOWN" | string %]
+					</td>
+					<td valign="top" style="width:100px">
+						[% USE title=String(prefs.pref_szAltServerName) %]
+						[% fmt="PLUGIN_SRVRPOWERCTRL_INCLUDESHUTDOWN2AS" | string %]
+						<input name="pref_bInclude_Shutdown2AS" type="checkbox" [% IF prefs.pref_bInclude_Shutdown2AS %] checked ] [% END %] >&nbsp;[% title.format(fmt) %]
+					</td>
+				</tr>
+			</table>
+			</div>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SUSPEND_CMD" desc="PLUGIN_SRVRPOWERCTRL_CMD_DESC" %] &nbsp;
+			<div style="margin-top:-18px; margin-bottom:-18px">
+			<table cellspacing=8 >
+				<tr>
+					<td valign="top">
+						<input type="text" class="stdedit" name="pref_szSuspend_cmd" id="szSuspend_cmd" value="[% prefs.pref_szSuspend_cmd | html_entity %]" size="50">
+					</td>
+					<td valign="top" style="width:80px">
+						<input name="pref_bInclude_Suspend" type="checkbox" [% IF prefs.pref_bInclude_Suspend %] checked ] [% END %] >&nbsp;[% "PLUGIN_SRVRPOWERCTRL_INCLUDESUSPEND" | string %]
+					</td>
+					<td valign="top" style="width:100px">
+						[% USE title=String(prefs.pref_szAltServerName) %]
+						[% fmt="PLUGIN_SRVRPOWERCTRL_INCLUDESUSPEND2AS" | string %]
+						<input name="pref_bInclude_Suspend2AS" type="checkbox" [% IF prefs.pref_bInclude_Suspend2AS %] checked ] [% END %] >&nbsp;[% title.format(fmt) %]
+					</td>
+				</tr>
+			</table>
+			</div>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_HIBERNATE_CMD" desc="PLUGIN_SRVRPOWERCTRL_CMD_DESC" %] &nbsp;
+			<div style="margin-top:-18px; margin-bottom:-18px">
+			<table cellspacing=8 >
+				<tr>
+					<td valign="top">
+						<input type="text" class="stdedit" name="pref_szHibernate_cmd" id="szHibernate_cmd" value="[% prefs.szHibernate_cmd | html_entity %]" size="50">
+					</td>
+					<td valign="top" style="width:80px">
+						<input name="pref_bInclude_Hibernate" type="checkbox" [% IF prefs.pref_bInclude_Hibernate %] checked ] [% END %] >&nbsp;[% "PLUGIN_SRVRPOWERCTRL_INCLUDEHIBERNATE" | string %]
+					</td>
+					<td valign="top" style="width:100px">
+						[% USE title=String(prefs.pref_szAltServerName) %]
+						[% fmt="PLUGIN_SRVRPOWERCTRL_INCLUDEHIBERNATE2AS" | string %]
+						<input name="pref_bInclude_Hibernate2AS" type="checkbox" [% IF prefs.pref_bInclude_Hibernate2AS %] checked ] [% END %] >&nbsp;[% title.format(fmt) %]
+					</td>
+				</tr>
+			</table>
+			</div>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_REBOOT_CMD" desc="PLUGIN_SRVRPOWERCTRL_CMD_DESC" %] &nbsp;
+			<div style="margin-top:-18px; margin-bottom:-18px">
+			<table cellspacing=8 >
+				<tr>
+					<td valign="top">
+						<input type="text" class="stdedit" name="pref_szReboot_cmd" id="szReboot_cmd" value="[% prefs.pref_szReboot_cmd | html_entity %]" size="50">
+					</td>
+					<td valign="top" style="width:180px">
+						<input name="pref_bInclude_Reboot" type="checkbox" [% IF prefs.pref_bInclude_Reboot %] checked ] [% END %] >&nbsp;[% "PLUGIN_SRVRPOWERCTRL_INCLUDEREBOOT" | string %]
+					</td>
+				</tr>
+			</table>
+			</div>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SCRESTART_CMD" desc="PLUGIN_SRVRPOWERCTRL_SCRESTART_CMD_DESC" %] &nbsp;
+			<div style="margin-top:-18px; margin-bottom:-18px">
+			<table cellspacing=8 >
+				<tr>
+					<td valign="top">
+						<input type="text" class="stdedit" name="pref_szSCRestart_cmd" id="szSCRestart_cmd" value="[% prefs.pref_szSCRestart_cmd | html_entity %]" size="50"><br>
+					</td>
+					<td valign="top" style="width:180px">
+						<input name="pref_bInclude_SCRestart" type="checkbox" [% IF prefs.pref_bInclude_SCRestart %] checked ] [% END %] >&nbsp;[% "PLUGIN_SRVRPOWERCTRL_INCLUDESCRESTART" | string %]
+					</td>
+				</tr>
+			</table>
+			</div>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_INCLUDEWEBINTERFACE" desc="PLUGIN_SRVRPOWERCTRL_INCLUDEWEBINTERFACE_DESC" %] &nbsp;
+			<input name="pref_bInclude_WebInterface" type="checkbox" [% IF prefs.pref_bInclude_WebInterface %] checked ] [% END %] >
+		[% END %]
+
+	[% END %]<hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_CUSTOM_COMMANDS" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% FOREACH spccustcmdentry IN srvrpowerctrl_custcmds; idx = loop.index %]
+			[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_LABEL" desc="PLUGIN_SRVRPOWERCTRL_CUSTOMCMD_LABEL_DESC" %] &nbsp;
+			<input id=[% "spccustcmdlabel" _ idx %] type="text" class="stdedit" name=[% "spccustcmdlabel" _ idx %] value="[% spccustcmdentry.label %]" size="20"> &nbsp;
+			<input id=[% "spccustcmdcommand" _ idx %] type="text" class="stdedit" name=[% "spccustcmdcommand" _ idx %] value="[% spccustcmdentry.command %]" size="56"> &nbsp;
+			[% END %]
+		[% END %]
+
+	[% END %]<hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_BASIC_COMMAND_TWEAKS" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_REGRET_DELAY" desc="PLUGIN_SRVRPOWERCTRL_REGRET_DELAY_DESC" %]
+			<input type="text" class="stdedit sliderInput_1_30" name="pref_nRegretDelay" id="nRegretDelay" value="[% prefs.pref_nRegretDelay %]" size="5">
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_POWEROFFPLAYERS" desc="PLUGIN_SRVRPOWERCTRL_POWEROFFPLAYERS_DESC" %]&nbsp;
+			<input name="pref_bPowerOffPlayers" type="checkbox" [% IF prefs.pref_bPowerOffPlayers %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_ONXSHUTDOWN_CMD" desc="PLUGIN_SRVRPOWERCTRL_ONXSHUTDOWN_CMD_DESC" %] &nbsp;
+			<input type="text" class="stdedit" name="pref_szOnXShutdown_cmd" id="szOnXShutdown_cmd" value="[% prefs.pref_szOnXShutdown_cmd | html_entity %]" size="80"><br>
+		[% END %]
+
+
+	[% END %]<br><hr />
+
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_MONITOR" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_MONITOR_SYSTEM" desc="PLUGIN_SRVRPOWERCTRL_IDLE_MONITOR_SYSTEM_DESC" %] &nbsp;
+			<input name="pref_bIdleMonitorSystem" type="checkbox" [% IF prefs.pref_bIdleMonitorSystem %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_PLAYERS" desc="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_PLAYERS_DESC" %] &nbsp;
+			<input name="pref_bIdleChkPlayers" type="checkbox" [% IF prefs.pref_bIdleChkPlayers %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_LOGONS" desc="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_LOGONS_DESC" %] &nbsp;
+			<input name="pref_bIdleChkLogons" type="checkbox" [% IF prefs.pref_bIdleChkLogons %] checked ] [% END %] >
+		[% END %]
+
+		[% IF srvrpowerctrl_os != 'win' %]
+
+			[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_SAMBA" desc="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_SAMBA_DESC" %] &nbsp;
+				<input name="pref_bIdleChkSamba" type="checkbox" [% IF prefs.pref_bIdleChkSamba %] checked ] [% END %] >
+			[% END %]
+
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_NET_THRESHOLD" desc="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_NET_THRESHOLD_DESC" %]
+			<input type="text" class="stdedit sliderInput_0_1024000" name="pref_nIdleNetThreshold" id="nIdleNetThreshold" value="[% prefs.pref_nIdleNetThreshold %]" size="5"> [% "PLUGIN_SRVRPOWERCTRL_IDLE_CHK_NET_UNITS" | string %]
+			[% IF NOT prefs.pref_nIdleNetThreshold %] <b> [% "PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISABLED_UNITS" | string %] </b> [% END %]
+		[% END %]
+
+		[% IF srvrpowerctrl_os != 'win' %]
+
+			[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISKS_THRESHOLD" desc="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISKS_THRESHOLD_DESC" %]
+				<input type="text" class="stdedit sliderInput_0_1024000" name="pref_nIdleDisksThreshold" id="nIdleDisksThreshold" value="[% prefs.pref_nIdleDisksThreshold %]" size="5"> [% "PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISKS_UNITS" | string %]
+				[% IF NOT prefs.pref_nIdleDisksThreshold %] <b> [% "PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISABLED_UNITS" | string %] </b> [% END %]
+			[% END %]
+
+			[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CPU_THRESHOLD" desc="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CPU_THRESHOLD_DESC" %]
+				<input type="text" class="stdedit sliderInput_0_10" name="pref_nIdleCPULoadThreshold" id="nIdleCPULoadThreshold" value="[% prefs.pref_nIdleCPULoadThreshold %]" size="5"> [% "PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CPU_UNITS" | string %]
+				[% IF NOT prefs.pref_nIdleCPULoadThreshold %] <b> [% "PLUGIN_SRVRPOWERCTRL_IDLE_CHK_DISABLED_UNITS" | string %] </b> [% END %]
+			[% END %]
+
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CUST_CMD" desc="PLUGIN_SRVRPOWERCTRL_IDLE_CHK_CUST_CMD_DESC" %] &nbsp;
+			<input type="text" class="stdedit" name="pref_szIdleWatchdogCustCheck_cmd" id="szIdleWatchdogCustCheck_cmd" value="[% prefs.pref_szIdleWatchdogCustCheck_cmd | html_entity %]" size="80">
+		[% END %]
+
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_IDLETIME" desc="PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_IDLETIME_DESC" %]
+			<input type="text" class="stdedit sliderInput_5_240" name="pref_nIdleWatchdogTimeout" id="nIdleWatchdogTimeout" value="[% prefs.pref_nIdleWatchdogTimeout %]" size="5"> [% "PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_IDLETIME_UNITS" | string %]
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_ACTION" desc="PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_ACTION_DESC" %] &nbsp;
+			<select name="pref_szIdleWatchdogAction">
+				[% FOREACH action IN srvrpowerctrl_actionlist %]
+						<option value="[% action.action %]" [% IF action.action == prefs.pref_szIdleWatchdogAction %]selected[% END %]>[% action.menutext %]</option>
+				[% END %]
+			</select>
+		[% END %]
+
+	[% END %]<hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_EOD_MONITOR" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG" desc="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_DESC" %] &nbsp;
+			<input name="pref_bUseEODWatchdog" type="checkbox" [% IF prefs.pref_bUseEODWatchdog %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_IDLETIME" desc="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_IDLETIME_DESC" %]
+			<input type="text" class="stdedit sliderInput_0_240" name="pref_nEODWatchdogTimeout" id="nEODWatchdogTimeout" value="[% prefs.pref_nEODWatchdogTimeout %]" size="5"> [% "PLUGIN_SRVRPOWERCTRL_IDLE_WATCHDOG_IDLETIME_UNITS" | string %]
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_TIMES" desc="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_TIMES_DESC" %] &nbsp;
+			<input type="text" class="stdedit" name="pref_szEODWatchdogStartTime" id="szEODWatchdogStartTime" value="[% prefs.pref_szEODWatchdogStartTime %]" size="8"> &nbsp;
+			<input type="text" class="stdedit" name="pref_szEODWatchdogEndTime" id="szEODWatchdogEndTime" value="[% prefs.pref_szEODWatchdogEndTime %]" size="8">
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_ACTION" desc="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_ACTION_DESC" %] &nbsp;
+			<select name="pref_szEODWatchdogAction">
+				[% FOREACH action IN srvrpowerctrl_actionlist %]
+						<option value="[% action.action %]" [% IF action.action == prefs.pref_szEODWatchdogAction %]selected[% END %]>[% action.menutext %]</option>
+				[% END %]
+			</select>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_CMD" desc="PLUGIN_SRVRPOWERCTRL_EOD_WATCHDOG_CMD_DESC" %] &nbsp;
+			<input type="text" class="stdedit" name="pref_szEODWatchdog_cmd" id="szEODWatchdog_cmd" value="[% prefs.pref_szEODWatchdog_cmd | html_entity %]" size="80">
+		[% END %]
+
+	[% END %]<br><hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SLEEP_INTERACTIONS" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_HOOK_SLEEP_BUTTON" desc="PLUGIN_SRVRPOWERCTRL_HOOK_SLEEP_BUTTON_DESC" %] &nbsp;
+			<input name="pref_bHookSleepButton" type="checkbox" [% IF prefs.pref_bHookSleepButton %] checked [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SLEEP_BUTTON_ACTION" desc="PLUGIN_SRVRPOWERCTRL_SLEEP_BUTTON_ACTION_DESC" %] &nbsp;
+			<select name="pref_szSleepButtonAction">
+				<option value="plugin_menu" [% IF prefs.pref_szSleepButtonAction == "plugin_menu" %]selected[% END %]>[% "PLUGIN_SRVRPOWERCTRL_MENU" | string %]</option>
+				[% FOREACH action IN srvrpowerctrl_actionlist %]
+						<option value="[% action.action %]" [% IF action.action == prefs.pref_szSleepButtonAction %]selected[% END %]>[% action.menutext %]</option>
+				[% END %]
+			</select><br>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SLEEP_WATCHDOG" desc="PLUGIN_SRVRPOWERCTRL_SLEEP_WATCHDOG_DESC" %] &nbsp;
+			<input name="pref_bUseSleepEndWatchdog" type="checkbox" [% IF prefs.pref_bUseSleepEndWatchdog %] checked [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SLEEP_WATCHDOG_ACTION" desc="PLUGIN_SRVRPOWERCTRL_SLEEP_WATCHDOG_ACTION_DESC" %] &nbsp;
+			<select name="pref_szSleepEndWatchdogAction">
+				[% FOREACH action IN srvrpowerctrl_actionlist %]
+						<option value="[% action.action %]" [% IF action.action == prefs.pref_szSleepEndWatchdogAction %]selected[% END %]>[% action.menutext %]</option>
+				[% END %]
+			</select>
+		[% END %]
+
+	[% END %]<br><hr />
+
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_WAKE_INTERACTIONS" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SETALARMRTCWAKEUP" desc="PLUGIN_SRVRPOWERCTRL_SETALARMRTCWAKEUP_DESC" %]&nbsp;
+			<input name="pref_bSetRTCWakeForAlarm" type="checkbox" [% IF prefs.pref_bSetRTCWakeForAlarm %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SETEODRTCWAKEUP" desc="PLUGIN_SRVRPOWERCTRL_SETEODRTCWAKEUP_DESC" %]&nbsp;
+			<input name="pref_bSetRTCWakeForEOD" type="checkbox" [% IF prefs.pref_bSetRTCWakeForEOD %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SETRESCANRTCWAKEUP" desc="PLUGIN_SRVRPOWERCTRL_SETRESCANRTCWAKEUP_DESC" %]&nbsp;
+			<input name="pref_bSetRTCWakeForRescan" type="checkbox" [% IF prefs.pref_bSetRTCWakeForRescan %] checked ] [% END %] >
+		[% END %]
+
+		[% IF srvrpowerctrl_os != 'win' %]
+			[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SETCRONTABRTCWAKEUP" desc="PLUGIN_SRVRPOWERCTRL_SETCRONTABRTCWAKEUP_DESC" %]&nbsp;
+				<input name="pref_bSetRTCWakeForCrontab" type="checkbox" [% IF prefs.pref_bSetRTCWakeForCrontab %] checked ] [% END %] >
+			[% END %]
+		[% END %]
+
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_RTCWAKEUPADVANCE" desc="PLUGIN_SRVRPOWERCTRL_RTCWAKEUPADVANCE_DESC" %]
+			<input type="text" class="stdedit sliderInput_1_30" name="pref_nRTCWakeupAdvance" id="nRTCWakeupAdvance" value="[% prefs.pref_nRTCWakeupAdvance %]" size="5">
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_SETRTCWAKEUP_CMD" desc="PLUGIN_SRVRPOWERCTRL_SETRTCWAKEUP_CMD_DESC" %] &nbsp;
+			<input type="text" class="stdedit" name="pref_szSetRTCWake_cmd" id="szSetRTCWake_cmd" value="[% prefs.pref_szSetRTCWake_cmd | html_entity %]" size="80">
+		[% END %]
+
+	[% END %]<br><hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_BASIC_ALTERNATE_SERVER" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_ALTSRVR_LABEL" desc="PLUGIN_SRVRPOWERCTRL_ALTSRVR_LABEL_DESC" %] &nbsp;
+			<select name="pref_szAltServerName">
+				[% FOREACH srvrentry IN srvrpowerctrl_altservers %]
+					<option value="[% srvrentry.serverName %]" [% IF srvrentry.serverName == prefs.pref_szAltServerName %]selected[% END %]>[% srvrentry.serverName %]</option>
+				[% END %]
+			</select>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_PUSH2AS_DELAY" desc="PLUGIN_SRVRPOWERCTRL_PUSH2AS_DELAY_DESC" %]
+			<input type="text" class="stdedit sliderInput_0_240" name="pref_nAltServerPostPushDelay" id="nAltServerPostPushDelay" value="[% prefs.pref_nAltServerPostPushDelay %]" size="5">
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_PUSH2AS_ALLPLAYERS" desc="PLUGIN_SRVRPOWERCTRL_PUSH2AS_ALLPLAYERS_DESC" %] &nbsp;
+			<input name="pref_bAltServerPushAll" type="checkbox" [% IF prefs.pref_bAltServerPushAll %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_PUSH2AS_UNSYNC" desc="PLUGIN_SRVRPOWERCTRL_PUSH2AS_UNSYNC_DESC" %] &nbsp;
+			<input name="pref_bAltServerUnSyncLocal" type="checkbox" [% IF prefs.pref_bAltServerUnSyncLocal %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_PUSH2AS_POWEROFFPLAYERS" desc="PLUGIN_SRVRPOWERCTRL_PUSH2AS_POWEROFFPLAYERS_DESC" %] &nbsp;
+			<input name="pref_bAltServerPowerOffPlayers" type="checkbox" [% IF prefs.pref_bAltServerPowerOffPlayers %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_PUSH2ASPLAYERS_MACS" desc="PLUGIN_SRVRPOWERCTRL_PUSH2ASPLAYERS_MACS_DESC" %] &nbsp;
+			<input type="text" class="stdedit" name="pref_szAltServerPushMACs" id="szAltServerPushMACs" value="[% prefs.pref_szAltServerPushMACs %]" size="80">
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_ONXSHUTDOWN_PUSH2AS" desc="PLUGIN_SRVRPOWERCTRL_ONXSHUTDOWN_PUSH2AS_DESC" %] &nbsp;
+			<input name="pref_bAltServerPushOnXShutdown" type="checkbox" [% IF prefs.pref_bAltServerPushOnXShutdown %] checked ] [% END %] >
+		[% END %]
+
+	[% END %]<br><hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_ON_WAKEUP" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS" desc="PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_DESC" %] &nbsp;
+			<input name="pref_bOnWakeupFetchPlayers" type="checkbox" [% IF prefs.pref_bOnWakeupFetchPlayers %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_FORCE" desc="PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_FORCE_DESC" %] &nbsp;
+			<input name="pref_bOnWakeupFetchPlayersForce" type="checkbox" [% IF prefs.pref_bOnWakeupFetchPlayersForce %] checked ] [% END %] >
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_WAIT" desc="PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_WAIT_DESC" %]
+			<input type="text" class="stdedit sliderInput_5_300" name="pref_nOnWakeupFetchPlayersDelay" id="nOnWakeupFetchPlayersDelay" value="[% prefs.pref_nOnWakeupFetchPlayersDelay %]" size="5">
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_MACS" desc="PLUGIN_SRVRPOWERCTRL_RESTORESNPLAYERS_MACS_DESC" %] &nbsp;
+			<input type="text" class="stdedit" name="pref_szOnWakeupFetchPlayersMACs" id="szOnWakeupFetchPlayersMACs" value="[% prefs.pref_szOnWakeupFetchPlayersMACs %]" size="80"><br>
+		[% END %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_ONWAKEUP_CMD" desc="PLUGIN_SRVRPOWERCTRL_ONWAKEUP_CMD_DESC" %] &nbsp;
+			<input type="text" class="stdedit" name="pref_szOnWakeup_cmd" id="szOnWakeup_cmd" value="[% prefs.pref_szOnWakeup_cmd | html_entity %]" size="80">
+		[% END %]
+
+	[% END %]<br><hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_LOG_SETTINGS" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_LOG_SETLOG" desc="PLUGIN_SRVRPOWERCTRL_LOG_SETLOG_DESC" %] &nbsp;
+			<select name="pref_szLoggingLevel">
+				[% FOREACH logLevel IN srvrpowerctrl_logLevels %]
+					<option value="[% logLevel.logLevel %]" [% IF logLevel.logLevel == prefs.pref_szLoggingLevel %]selected[% END %]>[% logLevel.logName %]</option>
+				[% END %]
+			</select>
+			<div style="float:right; text-align:right;">
+			<a href="[% webroot %]plugins/SrvrPowerCtrl/html/loginfo.html?[% srvrpowerctrl_urlsuffix %]" target="_blank">[% "PLUGIN_SRVRPOWERCTRL_LOGGING_VIEW_LOG" | string %]</a><br><br>
+			<a href="[% webroot %]plugins/SrvrPowerCtrl/html/troubleshooting.html" target="_blank">[% "PLUGIN_SRVRPOWERCTRL_TROUBLESHOOTING_HELP_PAGE" | string %]</a>
+			</div>
+		[% END %]
+
+	[% END %]<br><hr />
+
+	[% WRAPPER setting title="PLUGIN_SRVRPOWERCTRL_DEFAULT_SETTINGS" desc="" %][% END %]
+
+	[% WRAPPER settingSection %]
+
+		[% WRAPPER setting title="" desc="PLUGIN_SRVRPOWERCTRL_RESET_SETTINGS_DESC" %] &nbsp;
+			<input type="button" value="[% "PLUGIN_SRVRPOWERCTRL_RESET_SETTINGS" | string %]" onclick="resetsettings()" >
+		[% END %]
+
+	[% END %]<br><br>
+
+<hr /><div align=center>[% srvrpowerctrl_stats %]</div>
+<p>&nbsp;</p>
+
+[% PROCESS settings/footer.html %]

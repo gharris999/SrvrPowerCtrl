@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-Equiv="Cache-Control" Content="no-cache" />
+<meta http-Equiv="Pragma" Content="no-cache" />
+<meta http-Equiv="Expires" Content="0" />
+</head>
+
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[%- PROCESS helpheader.html -%]
+
+<script language="JavaScript" type="text/javascript">
+
+function MailProblemReport() {
+
+	var to = "srvrpowerctrl@gmail.com";
+	var subject = "SrvrPowerCtrl Problem Report";
+	var body = "Help!  I\'m having a problem with SrvrPowerCtrl!\n\n" +
+		"A detailed description of what I\'ve observed follows:\n\n" +
+		"[Please enter a detailed]\n" +
+		"[description of the problem here.]\n\n" +
+		"==============================================\n" +
+		"SrvrPowerCtrl log attached:\n" +
+		"==============================================\n" +
+		"[paste log entries here..]\n\n" +
+		"==============================================\n" +
+		"SrvrPowerCtrl prefs attached:\n" +
+		"==============================================\n" +
+		"[paste prefs entries here..]";
+
+	//body += document.getElementById("logdata").innerHTML;
+	//alert(body);
+
+	var doc = "mailto:" + to +
+	"?subject=" + escape(subject) +
+	"&body=" + escape(body);
+
+	window.location = doc;
+}
+
+//var _logframe = document.getElementById("logframe");
+//_logframe.src = _logframe.src;
+//_logframe.contentWindow.location.href = _logframe.src;
+
+</script>
+
+
+<style type="text/css">
+<!--
+h1 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:large;
+}
+p {
+	font-size:1.2em;
+}
+li {
+	font-size:1.2em;
+	/* padding:0em 0em 0em 2.8em; */
+	padding-left: 2.8em;
+	/* margin-left:-1em; */
+	/* text-indent: -1em; */
+}
+
+.indented
+   {
+   padding-left: 1.5em;
+   }
+
+
+-->
+</style>
+
+
+
+<div style="width:80%; margin-left:10%;">
+
+<div style="margin-left:-2em;">
+<p><a href="http://code.google.com/p/srvrpowerctrl/" target="_blank"><img src="images/icon.png" alt="SrvrPowerCtrl" width="56" height="56" hspace="10" align="left" /></a>
+<br><h3>SrvrPowerCtrl Log</h3>
+</div>
+
+<p><br>These log entries can assist in troubleshooting problems with SrvrPowerCtrl.  Generally speaking, it's best to set SrvrPowerCtrl's logging to 'Debug' in order to diagnose problems.  You can set SrvrPowerCtrl's logging level at the bottom of the settings page.  SrvrPowerCtrl's current logging level is set to: '[% srvrpowerctrl_logLevel %]'.</p>
+
+<h4>SrvrPowerCtrl entries from the server.log:</h3>
+
+<div>
+<iframe style="font-family:Courier; font-size:.5em" name="srvrpowerctrllog" src="[% webroot %]plugins/SrvrPowerCtrl/html/log.html?rand=[% srvrpowerctrl_urlsuffix %]" width="100%" height="600" frameborder="1" marginheight="0" marginwidth="0" scrolling="yes" id="logframe">
+  <p>Not available.</p>
+</iframe>
+</div>
+<br>
+
+<h4>SrvrPowerCtrl prefs:</h3>
+
+<div>
+<iframe style="font-family:Courier; font-size:.5em" name="srvrpowerctrlprefs" src="[% webroot %]plugins/SrvrPowerCtrl/html/prefs.html?rand=[% srvrpowerctrl_urlsuffix %]" width="100%" height="300" frameborder="1" marginheight="0" marginwidth="0" scrolling="yes" id="prefsframe">
+  <p>Not available.</p>
+</iframe>
+</div>
+
+
+<p>To report a problem with SrvrPowerCtrl or to request assistance, please highlight and then copy to the clipboard any relevant lines from the log above.  Then, please click on the email button and paste the log entries into your message.  You may also want to paste the prefs values into the email as well.<br><br>Note: the mail button relies on you having an email client configured on the machine from which you're browsing.</p>
+
+<br><input type="button" value="[% "PLUGIN_SRVRPOWERCTRL_LOGGING_MAIL_PROBREPORT" | string %]" onclick="MailProblemReport()" >
+
+<br><br>
+
+<hr /><table border="0" width="100%">
+<tr>
+<td align="left"><a href="/Default/plugins/SrvrPowerCtrl/html/help.html" >[% "PLUGIN_SRVRPOWERCTRL_BACKTO_HELP_PAGE" | string %]</a></td>
+<td align="center"><a href="/Default/plugins/SrvrPowerCtrl/html/troubleshooting.html" style="float:right;">[% "PLUGIN_SRVRPOWERCTRL_TROUBLESHOOTING_HELP_PAGE" | string %]</a></td>
+<td align="right"><a href="http://code.google.com/p/srvrpowerctrl/" style="text-align:center;">[% "PLUGIN_SRVRPOWERCTRL_HOME_PAGE" | string %]</a></td>
+</tr>
+</table>
+
+</div>
+
+[% PROCESS helpfooter.html %]
+</html>

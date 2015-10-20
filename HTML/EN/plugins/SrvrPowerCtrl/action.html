@@ -1,0 +1,42 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[%- pageHeaderScripts = PROCESS JsSrvrPowerCtrl -%]
+[%- BLOCK JsSrvrPowerCtrl %]
+<script type="text/javascript">
+
+var nSeconds = [% refreshtime %];
+
+setTimeout( "update_countdown()", 1 );
+
+function update_countdown() {
+
+	var szMessage = "[% actionmessage %]";
+
+	if (nSeconds > 0) {
+		document.getElementById('countdownmsg').innerHTML = szMessage.replace(/[0-9]+/g, nSeconds);
+		setTimeout( "update_countdown()", 1000 );
+	} else {
+		parent.browser.location = '[% webroot %][% refreshurl %]?action=[% action %]';
+	}
+
+	nSeconds--;
+}
+</script>
+<noscript>
+	<meta http-equiv="Refresh" content="[% refreshtime %]; url=[% webroot %][% refreshurl %]?action=[% action | uri %]" />
+</noscript>
+[% END -%]
+
+[%- PROCESS pageheader.html -%]
+
+[% IF webroot == '/' %]
+	<div style="background-color:#404040; height:119px; margin-top:-2px; margin-right:-5px; margin-left:-5px;">
+	<img src="/Default/plugins/SrvrPowerCtrl/html/images/icon.png" alt="SrvrPowerCtrl" width="96" height="96" hspace="12" vspace="12" align="left" />
+	</div>
+[% END %]
+
+	<br><h3><div id="countdownmsg">[% actionmessage %]</div></h3><br><br>
+
+	<a class="browseItemLink" href="[% webroot %]plugins/SrvrPowerCtrl/canceled.html?action=[% action | uri %]">[% "PLUGIN_SRVRPOWERCTRL_CANCEL" | string %]</a>
+
+
+[% PROCESS pagefooter.html %]

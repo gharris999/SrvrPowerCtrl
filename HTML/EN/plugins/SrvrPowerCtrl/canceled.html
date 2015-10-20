@@ -1,0 +1,35 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[%- pageHeaderScripts = PROCESS jsSPCCanceled -%]
+[%- BLOCK jsSPCCanceled %]
+<script type="text/javascript">
+setTimeout( "update_leftcontent()", [% refreshtime %] * 1000 );
+
+function update_leftcontent() {
+
+	var nRefresh = [% refreshtime %];
+
+	if (nRefresh > 0 ) {
+		parent.browser.location = '[% webroot %][% refreshurl %]';
+	}
+}
+</script>
+<noscript>
+	<meta http-equiv="Refresh" content="[% refreshtime %]; url=[% webroot %][% refreshurl %]" />
+</noscript>
+[% END -%]
+[%- PROCESS pageheader.html -%]
+
+[% IF webroot == '/' %]
+	<div style="background-color:#404040; height:93px; margin-top:-2px; margin-right:-5px; margin-left:-5px;">
+	<img src="/Default/plugins/SrvrPowerCtrl/html/images/icon.png" alt="SrvrPowerCtrl" width="64" height="64" hspace="12" vspace="12" align="left" />
+	</div>
+[% END %]
+
+	<br><h3>[% actionmessage %]</h3>
+
+
+
+[% PROCESS pagefooter.html %]

@@ -1,0 +1,80 @@
+==================================================================================================
+SrvrPowerCtrl notes for OSX
+==================================================================================================
+
+Setup, the easy way:
+
+Open a terminal window (click on the spotlight magnifying glass and type "terminal" and then
+hit enter.
+
+Copy the following commands and paste them into the terminal window one at a time, hitting
+enter after each paste:
+
+setup_script="/Users/$USER/Library/Application Support/SqueezeCenter/Plugins/SrvrPowerCtrl/scripts/MacOSX/srvrpowerctrl-setup.sh"
+
+sudo chmod 755 "$setup_script"
+(The sudo command may prompt you for your password)
+
+sudo "$setup_script" $USER
+
+
+==================================================================================================
+Plugin install location:
+==================================================================================================
+
+If installed via the Extension Downloader:
+
+/Users/[username]/Library/Caches/SqueezeCenter/InstalledPlugins/Plugins/SrvrPowerCtrl
+
+If installed manually:
+
+/Users/[username]/Library/Application Support/SqueezeCenter/Plugins
+
+-- or --
+
+/Library/Application Support/SqueezeCenter/Plugins
+
+
+==================================================================================================
+Helper scripts install locaton:
+==================================================================================================
+
+/usr/local/sbin
+
+
+==================================================================================================
+Log file location:
+==================================================================================================
+
+
+/Users/[username]/Library/Logs/SqueezeCenter/srvrpowerctrl.log
+
+
+==================================================================================================
+Action Commands:
+==================================================================================================
+
+Shutdown:	sudo /sbin/shutdown -h now
+
+Restart:	sudo /sbin/shutdown -r now
+
+Suspend:	sudo /usr/local/sbin/spc-sleep.sh
+
+Hibernate:	sudo /usr/local/sbin/spc-hibernate.sh
+
+SCRestart:	only supported on SqueezeCenter 7.4 and no script is required..
+
+Schedule wakeup: /usr/local/sbin/spc-wakeup.sh 06/03/09 12:00:00
+
+
+==================================================================================================
+Required additions to /etc/sudoers:
+==================================================================================================
+
+usrname ALL=NOPASSWD:/sbin/shutdown*
+usrname ALL=NOPASSWD:/usr/bin/pmset*
+usrname ALL=NOPASSWD:/usr/local/sbin/spc-sleep.sh
+usrname ALL=NOPASSWD:/usr/local/sbin/spc-hibernate.sh
+usrname ALL=NOPASSWD:/usr/local/sbin/spc-wakeup.sh*
+
+

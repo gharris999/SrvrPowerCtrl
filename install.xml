@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<extension>
+	<id>c5c958bf-4e12-41fe-9751-9f7df0d5bb2e</id>
+	<name>PLUGIN_SRVRPOWERCTRL_MODULE_NAME</name>
+	<module>Plugins::SrvrPowerCtrl::Plugin</module>
+	<version>20120716.103808</version>
+	<description>PLUGIN_SRVRPOWERCTRL_DESCRIPTION</description>
+	<creator>Gordon Harris</creator>
+	<email>srvrpowerctrl@gmail.com</email>
+	<defaultState>enabled</defaultState>
+	<homepageURL>http://code.google.com/p/srvrpowerctrl/</homepageURL>
+	<optionsURL>plugins/SrvrPowerCtrl/settings/basic.html</optionsURL>
+	<helpURL>plugins/SrvrPowerCtrl/html/help.html</helpURL>
+	<icon>plugins/SrvrPowerCtrl/html/images/icon.png</icon>
+	<type>2</type>
+	<targetApplication>
+		<id>SlimServer</id>
+		<minVersion>7.1</minVersion>
+		<maxVersion>*</maxVersion>
+	</targetApplication>
+</extension>

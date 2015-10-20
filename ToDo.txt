@@ -1,0 +1,408 @@
+======================
+Todo for SrvrPowerCtrl
+======================
+20120707
+Incorporate the samba checking and login checking into:
+  Stats.pm...........................................................done
+  Settings.pm........................................................done
+  basic.html.........................................................done
+  Watchdog.pm........................................................done
+
+Fix Settings.pm so that logon checking is OFF by default for Windows
+
+Redo help files, unifying all OSs into
+  unix-help.html
+  mac-help.html
+  win-help.html
+  ..etc..............................................................done
+
+Rework unix scripts, setup script....................................done
+
+Test with:
+  sc 7.3.4
+  sbs 7.4
+  lms 7.7
+  lms 7.8
+
+Test with
+  Fedora
+  Ubuntu
+  Windows
+  OS X
+
+Write up ack of Blondie in whats_new.txt
+
+Redo support scripts, unifying Redhat & Debian scripts
+Move scripts into folders matching $g{szOS}
+
+./mac
+./unix
+./win
+
+
+..or $^O: From http://perldoc.perl.org/perlport.html#PLATFORMS
+
+./linux
+./MSWin32
+./darwin
+./openbsd
+
+
+
+Future:
+Test on freebsd systems?  FreeBSD doesn't seem to formally support suspend/resume at this time.
+Identify a freebsd system and configure pm stuff using calls to acpiconf?
+See: http://www.freebsd.org/cgi/man.cgi?query=acpiconf&sektion=8&manpath=FreeBSD+9-current
+See: http://wiki.freebsd.org/SuspendResume
+
+
+Test on LMS 7.8 & linux platform: double check default prefs
+Test on LMS 7.8 & mac platform: double check default prefs
+Test on LMS 7.8 & windows platform: double check default prefs
+Clean up mac install script
+Test crontab mac functions
+Test spc-checkidle.sh scripts on Redhat, OS X, if working, install by default?
+
+Write SCPMMonitor.exe to provide PM monitoring and signaling to SrvrPowerCtrl
+
+Write SCStatsTool.exe to provide network stats on windows ?
+
+Move external command scripts to ./bin/os/distro ?
+Auto download SCPowerTool.zip and install on windows?
+Work out a method of intigrating SrvrPowerCtrl with powernap daemon on Ubuntu
+
+20100426
+Cleanup mac install script..
+Test in script to see if owner is root.  If it is, look up three parent dirs
+  and check ownership...........................................................done
+Test crontab wakeup time........................................................done
+Fix settings to default new prefs...............................................done
+
+
+20120424
+Update settings to add prefs for:
+bSetRTCWakeForAlarm
+bSetRTCWakeForEOD
+bSetRTCWakeForRescan
+bSetRTCWakeForCrontab...........................................................done
+
+20120420
+Updated Utils.pm SystemExecCmd(), right shifing return code so as to get correct
+exit value..  Thanks to epoch1970...............................................done
+
+20120419
+Update setblock.sh, clearblock.sh scripts with service user code................done
+Remove paths from install scripts in prep for Fedora 17 unified file system.....done
+General cleanup of install scripts..............................................done
+
+20111028
+Changed debian & redhat setup scripts to not make assumptions about sbs user....done
+Changed Block.pm to check for blockfile at /run/lock............................done
+
+20110417
+Add support for hiding custom commands on menus when the label begins with "."..done
+Add support for a .autoexec custom command that will be executed on startup.....done
+
+
+20110413
+Added prefs display to loginfo.html page........................................done
+Reworked SetLogLevel code.......................................................done
+Working on getting sleep+hold functioning with fab4
+
+
+20110412
+Modfy PushToAltServer so that $g{prefs}->szAltServerPushMACs can contain
+player names rather than MACs...................................................done
+Make 'no model : no name' executing command: log entry sound less ominous.......done
+
+
+20110404
+Added yet another pref to make disabling idle system monitoring easier..........done
+Changed reset to defauls link on settings page to a button......................done
+Added loginfo html page, email problem report facility..........................done
+Added 'zipdata' cli command to archive prefs & log entires in a zip file........done
+
+
+20110325
+Fixed AltServer::PushToAltServer() code.  Bugs identified by aubuti.............done
+Tweaked Alarms::GetRTCWakeupTime() to refine prevention of spurious wakeups.....done
+Tweaked CLI::pluginCLI() to allow propagation of client or switchclient to cmd..done
+Tweaked Util::CLIExecCmd() to use the calling client as the requester if no
+  client id included in the cli string..........................................done
+
+20110322
+Added softblock code............................................................done
+Bug fixes for unsync, pushtoas..................................................done
+Bug fix for Watchdog: prevent spurious wake-up detects..........................done
+
+20110321
+Added unsync on push, resync on pull code.......................................done
+
+20110319
+Clean up DisplayPlayerMessage().................................................done
+
+20110318
+Add random 10 second offset to timer setting code...............................done
+Fix 'No Action' no message disply...empty unblock message is leaking out to
+Jive clients....................................................................done
+
+10110316
+Update and streamline settings html.............................................done
+
+20110311
+Check help files................................................................done
+Check settings page.............................................................done
+Cleanup code....................................................................done
+
+
+20110216
+refactor PushPlayers code.......................................................done
+Flesh out refactor push2as to PushToAltServer...................................done
+Fix all instances of "sn" pref name usage.......................................done
+Fix webUI redirect to mysqueezebox.com..........................................done
+Refactor Settings Page AltServer to a combobox with mysb.com + NAMES of all
+other local servers.............................................................done
+Fix sleep+hold for SP-hardware players..........................................won't do..can't.
+Update whats_new.txt: mention push to alt server !mac feature...................done
+Refactor idle watchdog code for more checks.....................................done
+(get isplayerbusy code from ReallyPreventStandby)...............................done
+Add code to change queue size when idle-timeout is changed......................done
+http://www.mjmwired.net/kernel/Documentation/iostats.txt
+http://www.devcomments.com/How-to-read-Linux-s-proc-diskstats-easily-i28422.htm
+Add network monitor to idle watchdog............................................done
+Add disk monitor to idle watchdog...............................................done
+Add cpu monitor to idle watchdog................................................done
+Add cust chk cmd to idle watchdog...............................................done
+Hide cpu and disk monitoring on windows settings page...........................done
+Add $g{szOS} value to a pref...setting on startup?..............................done, undone
+Remove unused cruft from idle watchdog..........................................done
+Refactor EOD monitoring to incorporate bQueue and threshold stuff...............done
+Refactor EOD behavior to: Transition into EOD: execute cust script,
+  Startup or wake in EOD: execute selected action...............................done
+Update bQueue to allow zero-length queues.......................................done
+Update whats_new.txt to reflect changed EOD behavior............................done
+Update per-os prefs defaults for sys dev threshold monitoring
+Refactor push2SN code to support alternate servers..............................done
+Have push2as fall back to mysb.com if alt server unavailable....................done
+
+201114
+Remove NoIdle stuff since ReallyPreventStandby does this now....................done
+Rework custom commands to allow variable number of commands.....................done
+
+
+
+20100523
+Modify linux setup scripts to check for existence of:
+/etc/sudoers.d
+
+..and..
+
+#includedir in sudoers
+
+if so, add permissions to /etc/sudoers.d/squeeze.sudoers
+
+
+20100208
+Check if we really need File::Spec::Functions;  svn 30037 embedded does away with File::Find
+Update OSX help page to note that a reboot may be necessary after modifying sudoers
+
+
+20100102
+How to allow pushing players to other servers besides mysqueezebox.com?
+
+How to enumerate other servers?
+@otherServers = Plugins::SrvrPowerCtrl::Util::GetOtherServers();
+
+On Settings page: Combobox to select the preferred other server, checkbox to
+allow fallback to mysqueezebox.com?
+
+On the WebUI, combobox to select the other server to connect to, selecting
+the preferred server or mysqueezebox.com if unavailable..
+
+
+cli serverstatus has "other player count"...
+
+# return list of players connected to other servers
+my $other_players = Slim::Networking::Discovery::Players::getPlayerList();
+
+my $other_servers = Slim::Networking::Discovery::Server::getServerList();
+
+On IP3K displays, allow selection of "other server" ala PowerSave plugin?
+On WebUI, allow selection of other server via radio button?
+If TinySC is detected, prefer that over mysqueezebox.com?
+
+
+20091215
+For Squeezebox Touches, deviceid === 9, must connect player to TinySC when
+shutting down, suspending, etc to prevent the touch from waking the server up?
+
+20091023
+Added support for quotes and spaces in commands.
+Added support for custom commands for on-event actions
+
+20091017
+Added support for 'cli://' in commands to be directed to the cli
+
+
+20091011
+Add code to fix-up help link on settings page..
+
+For RH & Debian: add Epoch's autoblock login / logout scripts..
+http://forums.slimdevices.com/showpost.php?p=461587&postcount=935
+
+20091007
+Finish new version of RH setup script.
+Test RH setup script.
+Verify RH paths, distro name: RedHat
+[09-10-10 15:50:40.7737] Plugins::SrvrPowerCtrl::Settings::new (158)
+/var/lib/squeezeboxserver_svn/cache/InstalledPlugins/Plugins/SrvrPowerCtr,
+running on server: 00:15:58:7C:BE:D0,
+OS: unix,
+Distro: RedHat,
+SCVersion: 7.41
+
+Update svn.
+Rename RH script dir to match distro name.
+Update svn.........................................done
+
+Make new version of Debian setup script.
+Test debian setup script.
+Verify paths on debian, Distro name: Debian
+Rename debian script dir to match distro name.
+Update svn.........................................done
+
+Make new version of MacOSX setup script.
+Test MacOSX setup script.
+Verify paths on MaxOSX, distro name.
+
+/Users/daadmin/Library/Caches/Squeezebox/InstalledPlugins/Plugins/SrvrPowerCtr,
+running on server: 00:16:cb:ab:69:ea,
+OS: mac,
+Distro: MacOSX,
+SCVersion: 7.41
+
+Rename MacOSX script dir to match distro name.
+Update svn....................................................done
+
+Windows:
+C:/ProgramData/Squeezebox/Cache/InstalledPlugins/Plugins/SrvrPowerCtr,
+running on server: 06:1C:B3:B0:2A:60,
+OS: win,
+Distro: Windows,
+SCVersion: 7.41
+
+Update help system:
+
+Initial help page should check for existance of spc-wake.sh, SCPowerTool.exe etc..
+
+Have initial help screen put setup link at bottom of page if spc-wake.sh found.
+
+Have link point to correct setup page for
+
+20090817: fixes for SB7.4:
+
+[09-08-17 10:32:49.9560] Slim::Web::HTTP::protectURI (2432) Error: Slim::Web::HTTP::protectURI() is deprecated - please use Slim::Web::HTTP::CSRF->protectURI() instead
+[09-08-17 10:32:49.9585] Slim::Web::HTTP::protectCommand (2442) Error: Slim::Web::HTTP::protectCommand() is deprecated - please use Slim::Web::HTTP::CSRF->protectCommand() instead
+[09-08-17 10:32:49.9754] Slim::Web::HTTP::addPageFunction (2369) Error: Slim::Web::HTTP::addPageFunction() is deprecated - please use Slim::Web::Pages->addPageFunction() instead
+[09-08-17 10:32:49.9767] Slim::Web::HTTP::protect (2447) Error: Slim::Web::HTTP::protect() is deprecated - please use Slim::Web::HTTP::CSRF->protect() instead
+
+In setup scripts:
+
+test for what "/usr/bin/id squeezeboxserver" returns. If there is an id, shove extra lines in sudoers.  E.G.:
+
+# /usr/bin/id squeezeboxserver
+uid=491(squeezebox) gid=485(squeezebox) groups=485(squeezebox)
+
+Fixup documentation:
+
+Thanks for a great plugin,
+However it is odd that the most important features are not documented
+but hidden in configuration pages or other peoples forums posts
+useability should be more in focus for SB in general...
+
+Press hold snooze button to get to svrpowercontrol menu.
+Press right again when connecting to server to send WOL wakeup signal.
+- This should be one of the first things told when describing this plugin.
+
+WOL must be enabled on linux, there is a thread in unix/linux about this
+at least I need 'ethtool -s eth0 wol g; echo NMAC > /proc/acpi/wakeup' in rc.local
+
+
+
+
+Other plugin ideas:
+
+AudiobookMark...custom handler for M4b files..
+
+DayPart....OPML browser configured plugin to change random genre/artist/album settings based on time-of-day...
+
+
+Execute NotIdle cmd in EOD watchdog while not idle..
+
+
+Redo repo, add trunk to SrvrPowerCtrl project..
+
+
+
+
+Setup script:
+  Make script folders match distro name (e.g. Redhat, Debian, Darwin)
+  Check sudoers for each line to add to see if it's already there...
+  Make nopassword on the localhost only??
+  Make script folder match the OS Distro name?  i.e. 'Red Hat'
+
+
+
+
+Fix prefs logic for on-wakeup, wakeup cmd, restore from SN...
+  remove the double dependency..
+  Fixup the settings page to remove the extra pref..
+  Test
+
+Misc:
+  Get real path to plugin folder..test on Windows..
+  Get real OS distro name-type..............................done
+
+Settings page:
+  Create a page handling function for the settings page..
+  On page open, Look for presence of installed helper scripts...If they are already there, move further setup link to bottom of the page..
+
+Help page:
+  Create a page handling function for the help page..
+  Fixup primary help page so that it has a primary link to the appropriate setup for the OS
+
+OS Help page:
+  Create a page handling funcion for the oshelp page.
+  Detect if helper scripts are already installed..warn on page if setup appears to be already complete..
+  ..otherwise, semi-automate post-install setup:
+  On os help page, make form for user account name and password and button to execute the setup script..
+  system echo $password | sudo -S path_to_script
+
+
+Mac help page:
+
+for autoblock on logon/logoff, warn about non-standard CLI ports..
+
+
+Add auto defer while sleeping??
+
+Change EOD on idle behavior??
+
+Translations??
+
+
+
+New Plugin ideas:
+
+DayPart: random play pluging which changes include-genres based on time-of-day
+  Make include a customizable SQL query?
+  Include "whole works" support?
+    How to define "whole works" ?
+
+
+AudioBookMark...custom protocol handler for m4b files..
+Look at line-in plugin
+Look at old reworking of KDF's bookmark plugin
+
+CliPlay...custom protocol handler that takes cli commands
+http://forums.slimdevices.com/showthread.php?t=64163

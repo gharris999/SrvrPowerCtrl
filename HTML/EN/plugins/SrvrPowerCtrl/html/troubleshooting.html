@@ -1,0 +1,184 @@
+[%- pagetitle = 'PLUGIN_SRVRPOWERCTRL_MODULE_NAME' | string -%]
+[% pwd_list = BLOCK %]
+	[% "PLUGIN_SRVRPOWERCTRL_MODULE_NAME" | string %]
+[% END %]
+[% PROCESS helpheader.html %]
+
+<style type="text/css">
+<!--
+h1 {
+	font-size:2em;
+}
+
+h3 {
+	font-size:large;
+}
+p {
+	font-size:1.2em;
+}
+li {
+	font-size:1.2em;
+	/* padding:0em 0em 0em 2.8em; */
+	padding-left: 2.8em;
+	/* margin-left:-1em; */
+	/* text-indent: -1em; */
+}
+
+.indented
+   {
+   padding-left: 1.5em;
+   }
+
+
+-->
+</style>
+
+
+
+<div style="width:80%; margin-left:10%;">
+<p>&nbsp;</p>
+<p><a href="http://code.google.com/p/srvrpowerctrl/" target="_blank"><img src="images/icon.png" alt="SrvrPowerCtrl" width="56" height="56" hspace="10" align="left" /></a>
+<br><h3>Troubleshooting SrvrPowerCtrl</h3>
+
+<br /><br /><hr /><h3>SrvrPowerCtrl doesn't Shutdown&#47;Suspend&#47;Hibernate&#47;etc. the server</h3>
+<p>Failure on SrvrPowerCtrl's part to do it's basic job is usually related to operating system permissions problems.</p>
+
+<h4><br>Windows:</h4>
+
+<div class="indented">
+
+<p>Make sure the SCPowerTool.exe program is located somewhere in the PATH.  To verify this, open a command prompt and execute the command:</p>
+
+<p><tt style="font-size:.8em;">scpowertool.exe &frasl;?</tt></p>
+
+<p>That command should cause SCPowerTool to pop up it's 'About' dialog box. If, however, the command prompt responds with</p>
+
+<p><tt style="font-size:.8em;">'scpowertool.exe' is not recognized as an internal or external command, operable program or batch file.</tt></p>
+
+<p>..then the operating system cannot find SCPowerTool.exe and you should reinstall it, taking care to install it to a directory on your PATH, e.g. "C:\Windows".</p>
+
+<p>Alternatly, if after running the above command the command prompt responds with:</p>
+
+<p><tt style="font-size:.8em;">Access Denied</tt></p>
+
+<p>..then you have a permissions problem with the SCPowerTool.exe file.  You'll need to log into Windows as an administrator and change the permissions on the SCPowerTool.exe file so that regular users have read and execute permissions.</p>
+
+</div>
+
+<h4><br>Linux</h4>
+
+<div class="indented">
+
+<p>In order for SrvrPowerCtrl to work you must grant the <b>[% sbsuser %]</b> user certain permissions in the /etc/sudoers file.  This the the purpose of the srvrpowerctrl-setup.sh script.  It copies some helper scripts into /usr/local/sbin and tacks permissions for the &lsquo;[% sbsuser %]&rsquo; user onto the end of /etc/sudoers.  To test these permissions, open a terminal window and execute the following command:</p>
+
+<p><tt style="font-size:.8em;"># sudo -u [% sbsuser %] /usr/local/sbin/spc-test.sh</tt></p>
+
+<p>If that script does not respond with <tt style="font-size:.8em;"><b>SUCCESS!</b></tt> then you'll need to either re-run the srvrpowerctrl-setup.sh script or make your own modifications to /etc/sudoers via:</p>
+
+<p><tt style="font-size:.8em;"># sudo visudo</tt></p>
+
+</div>
+
+<h4><br>Mac OS X:</h4>
+
+<div class="indented">
+
+<p>As with Linux, the SrvrPowerCtrl user needs certain user permissions in the /etc/sudoers file.  But unlike Linux, this user is not [% sbsuser %] but rather the OS X user account that you used when you set up Squeezebox Server.  So, to test those permissions, log in using that user account and execute this command from a terminal window:</p>
+
+<p><tt style="font-size:.8em;"># /usr/local/sbin/spc-test.sh</tt></p>
+
+<p>Again, if that script does not respond with <tt style="font-size:.8em;">SUCCESS!</tt> then you'll need to either re-run the srvrpowerctrl-setup.sh script or make your own modifications to /etc/sudoers via:</p>
+
+<p><tt style="font-size:.8em;"># sudo visudo</tt></p>
+
+</div>
+
+<br /><hr /><h3>Can't open the SrvrPowerCtrl settings page</h3>
+<p>Generally, this problem doesn't arise if you've installed SrvrPowerCtrl via the Extension Downloader.  But if you are unable to "see" SrvrPowerCtrl's setting page, or if the page returns a 404 file not found error, please try manually rebooting your server.  If, after rebooting, you still can't see the settings page, try deleting a couple of [% sbsservername %]'s Cache folders:</p>
+
+<div class="indented">
+<p><tt style="font-size:.8em;">[% cachedir %]/FileCache</tt></p>
+<p><tt style="font-size:.8em;">[% cachedir %]/templates</tt></p>
+</div>
+
+<p>You'll need to manually reboot your server after deleting the Cache folders.</p>
+
+<p>If the problem persists, please try the following:</p>
+
+<h4>Windows:</h4>
+
+<div class="indented">
+
+<p>Make sure that you've used WinZip to unzip the plugin's zip file.  The built-in windows zip extraction utility seems to have problems extracting all the necessary directory names.  With WinZip, make sure, when extracting, that you are extracting to "C:\Program Files\[% sbsservername %]\server\Plugins" AND that you are extracting "All files/folders in archive" AND that "Use folder names" is checked.</p>
+
+</div>
+
+<h4>Linux:</h4>
+
+<div class="indented">
+
+<p>Try to avoid unzipping the plugin's zip distribution file on a Windows machine and then copying the files over to the linux server.  It's been my experience that line endings in the plugin's files may get modified in that process.  Instead, please copy the whole zip to [% pluginsdir %] and unzip it there from a terminal window:<br>
+<br><tt style="font-size:.8em;"># unzip SrvrPowerCtrl_latest.zip</tt><br><br></p>
+
+<p>Additionally, problems with opening SrvrPowerCtrl's settings page can involve user file permissions. Please consult the <a href="/Default/plugins/SrvrPowerCtrl/html/readme.txt" >readme.txt</a> file for information about setting appropriate file permissions on SrvrPowerCtrl for your distro.</p>
+
+</div>
+
+<hr /><h3>Wake for alarms problems</h3>
+
+<h4>Windows Vista and Windows 7:</h4>
+
+<div class="indented">
+
+<p>Make sure the &lsquo;Allow Wake Timers&rsquo; setting is <i>enabled</i> in Control Panel&rarr;Hardware and Sound&rarr;Power Options&rarr;Change Plan Settings&rarr;Advanced Settings.</p>
+
+</div>
+
+<br><h4>Ubuntu:</h4>
+<div class="indented">
+<p>Remember that Ubuntu 8.10 and later systems default to keeping the hardware clock set to local time rather than to UTC.  In order for system wakeup-for-alarms scheduling to work on these systems, change the &ldquo;Schedule Wakeup Command&rdquo; from:<br><br>
+
+    <tt style="font-size:.8em;">/usr/local/sbin/spc-wakeup.sh %d</tt><br><br>
+-- to --<br><br>
+    <tt style="font-size:.8em;">/usr/local/sbin/spc-wakeup.sh %l</tt>
+</p>
+</div>
+
+<br><h4>CentOS:</h4>
+
+<div class="indented">
+<p>If you can't get your CentOS machine to wakeup for alarms, check various scripts (like /etc/rc.d/init.d/halt) for calls to hwclock and comment them out. Pay special attention to /usr/lib/pm-utils/sleep.d/90clock.  You may need to comment out the call to /sbin/hwclock in suspend_clock() in order to get the rtc to wake the machine after suspending.</p>
+</div>
+
+<hr /><h3>Wake on lan problems</h3>
+<p>SrvrPowerCtrl doesn't set, change or otherwise mess-with the wake-on-lan (WOL) settings on your server.  But since this is a frequently asked question, here is my advice, for what it's worth:</p>
+
+<p>If you find that you are having problems getting your Squeezebox player to WOL your server, the first thing to check is that WOL is enabled and functioning on your server. Oftentimes, WOL must be enabled both in your machine's BIOS settings and in the operating system's power management settings.  For information on WOL settings for your operating system, try googling <a href="http://lmgtfy.com/?q=how+to+enable+wol+on+[% distro %]" target="_blank">&ldquo;how to enable wol on [% distro %]&rdquo;.</a></p>
+
+<p>Once you are reasonably certain that you've correctly enabled WOL on your server, you should test to see if it works by using a command-line &lsquo;magic packet&rsquo; utility on another computer on your network.</p>
+
+<p>For Windows machines, the free <a href="http://www.depicus.com/wake-on-lan/" target="_blank">Depicus WOL utilities</a> may be helpful.</p>
+
+<p>On linux and mac machines, the &lsquo;ether-wake&rsquo; utiltiy ought to be already installed as part of your operating system.</p>
+
+<p>When using any sort of WOL client utility, you'll need to know your server's MAC address which is [% macaddress %].</p>
+
+<p>Finally, if after establishing that you can WOL your server from another machine, but your Squeezebox player still can't wake it up, try performing a factory reset of your player. For older Squeezebox players, this involves unplugging the power to the player and then pressing and holding down the &lsquo;+&rsquo; key on the IR remote while plugging the power back in.  For newer Squeezebox players (Radio, Touch, etc.) there is a &lsquo;Factory Reset&rsquo; menu item on the Advanced Settings menu.</p>
+
+<hr /><h3>Further troubleshooting:</h3>
+
+<p>You can take troubleshooting to the next level by consulting the <a href="[% webroot %]plugins/SrvrPowerCtrl/html/loginfo.html?[% srvrpowerctrl_urlsuffix %]" >SrvrPowerCtrl entries in the server.log.</a>  On that page, you'll find a link for submitting problem reports via email.</p>
+
+<hr /><table border="0" width="100%">
+<tr>
+<td align="left"><a href="[% webroot %]plugins/SrvrPowerCtrl/html/help.html" >[% "PLUGIN_SRVRPOWERCTRL_BACKTO_HELP_PAGE" | string %]</a></td>
+<td align="center"><a href="[% webroot %]plugins/SrvrPowerCtrl/html/loginfo.html?[% srvrpowerctrl_urlsuffix %]" >[% "PLUGIN_SRVRPOWERCTRL_LOGGING_VIEW_LOG" | string %]</a></td>
+<td align="right"><a href="http://code.google.com/p/srvrpowerctrl/" style="text-align:center;">[% "PLUGIN_SRVRPOWERCTRL_HOME_PAGE" | string %]</a></td>
+</tr>
+</table>
+
+
+
+</div>
+
+[% PROCESS helpfooter.html %]
