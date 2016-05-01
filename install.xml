@@ -3,7 +3,7 @@
 	<id>c5c958bf-4e12-41fe-9751-9f7df0d5bb2e</id>
 	<name>PLUGIN_SRVRPOWERCTRL_MODULE_NAME</name>
 	<module>Plugins::SrvrPowerCtrl::Plugin</module>
-	<version>20160501.145329</version>
+	<version>20160501.151506</version>
 	<description>PLUGIN_SRVRPOWERCTRL_DESCRIPTION</description>
 	<creator>Gordon Harris</creator>
 	<email>srvrpowerctrl@gmail.com</email>

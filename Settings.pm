@@ -4,7 +4,7 @@
 #    hardware via SBS's web interface, your Squeezebox's IR remote
 #    or via a SBC / Touch / SqueezePlay.
 #
-#    Version 20160501.145329
+#    Version 20160501.151506
 #
 #    Copyright (C) 2008, 2009 Gordon Harris
 #
@@ -61,7 +61,7 @@ if ($^O =~ /^m?s?win/i) {		## Are we running windows?
 use vars qw(%g);
 
 %g = (
-	nAppVersion				=> 20160501.145329,											#version of this code..
+	nAppVersion				=> 20160501.151506,											#version of this code..
 	szAppPath				=> Plugins::SrvrPowerCtrl::Util::GetPluginPath(),			#Where the heck are we, anyway?
 	nSCVersion				=> Plugins::SrvrPowerCtrl::Util::GetSCVersion(),			#Version of SC/SBS/LMS.
 	szSCUser				=> Plugins::SrvrPowerCtrl::Util::GetSCUser(),				#User account we're running under.
@@ -201,6 +201,17 @@ my %hPrefDefaults_unix = (
 						'szSetRTCWake_cmd'				=>	"%s /usr/local/sbin/spc-wakeup.sh " . ($g{szDistro} eq 'Debian' && _DebianHasGUI() ? "%%l" : "%%d" ),
 			);
 
+my %hPrefDefaults_unix_systemctl = (
+						'szShutdown_cmd'				=>	"%s /bin/systemctl poweroff",
+						'szReboot_cmd'					=>	"%s /bin/systemctl reboot",
+						'szSuspend_cmd'					=>	"%s /bin/systemctl suspend",
+						'szHibernate_cmd'				=>	"%s /bin/systemctl hibernate",
+						'szSCRestart_cmd'				=>	"%s /usr/local/sbin/spc-restart.sh",
+						'bSetRTCWakeForCrontab'			=>	1,
+						'szSetRTCWake_cmd'				=>	"%s /usr/local/sbin/spc-wakeup.sh " . ($g{szDistro} eq 'Debian' && _DebianHasGUI() ? "%%l" : "%%d" ),
+			);
+
+
 my %hPrefDefaults_mac = (
 						'szShutdown_cmd'				=>	"%s /sbin/shutdown -h now",
 						'szReboot_cmd'					=>	"%s /sbin/shutdown -r now",
@@ -257,7 +268,7 @@ sub InitLog {
 			});
 		$g{log}->is_debug && $g{log}->debug("Log initialized..");
 	}
-	
+
 	$hPrefDefaults{szLoggingLevel} = GetCurrentLogLevel();
 }
 
@@ -470,7 +481,7 @@ sub MigratePrefs {
 
 	#Fix up the defaults with the OS specific stuff..
 	PrepOSSpecificPrefDefaults( 0 );
-	
+
 	FixUpPrefs();
 	ReadPrefs();
 
@@ -519,7 +530,7 @@ sub PrepOSSpecificPrefDefaults {
 			if ( substr($prefName,0,2) eq 'sz' ) {
 				$hPrefDefaults{$prefName} = sprintf($hPrefDefaults_win{$prefName}, $cmd, $logfile);
 			}
-			
+
 			$g{prefs}->set( $prefName, $hPrefDefaults{$prefName} );
 		}
 
@@ -527,19 +538,45 @@ sub PrepOSSpecificPrefDefaults {
 	} elsif ($g{szOS} eq 'unix') {
 		$cmd = "sudo";
 		$logfile =  Slim::Utils::OSDetect::dirsFor('log') . '/srvrpowerctrl.log';
-
-		foreach my $prefName (keys %hPrefDefaults_unix) {
-
-			if ( substr($prefName,0,2) eq 'sz' ) {
-				$hPrefDefaults{$prefName} = sprintf($hPrefDefaults_unix{$prefName}, $cmd, $logfile);
-			}
-
-			#Don't overwrite the prefs if they're defined...
-			if ( $bForce || ! $g{prefs}->exists($prefName) || (substr($prefName,0,2) eq 'sz' && $g{prefs}->{$prefName} eq '') ) {
-				$g{prefs}->set( $prefName, $hPrefDefaults{$prefName} );
-			}
+		
+		# Test to see if we're running under systemd..
+		my $res = `systemctl 2>&1 | grep -c '\\-\\.mount'`;
+		
+		if ( $res > 0 ) {
 			
+			warn 'SrvrPowerCtrl configuring for systemctl power management';
+			foreach my $prefName (keys %hPrefDefaults_unix_systemctl) {
+
+				if ( substr($prefName,0,2) eq 'sz' ) {
+					$hPrefDefaults{$prefName} = sprintf($hPrefDefaults_unix_systemctl{$prefName}, $cmd, $logfile);
+				}
+
+				#Don't overwrite the prefs if they're defined...
+				if ( $bForce || ! $g{prefs}->exists($prefName) || (substr($prefName,0,2) eq 'sz' && $g{prefs}->{$prefName} eq '') ) {
+					$g{prefs}->set( $prefName, $hPrefDefaults{$prefName} );
+				}
+
+			}
+		} else {
+			
+			warn 'SrvrPowerCtrl configuring for pm-utils power management';
+			foreach my $prefName (keys %hPrefDefaults_unix) {
+
+				if ( substr($prefName,0,2) eq 'sz' ) {
+					$hPrefDefaults{$prefName} = sprintf($hPrefDefaults_unix{$prefName}, $cmd, $logfile);
+				}
+
+				#Don't overwrite the prefs if they're defined...
+				if ( $bForce || ! $g{prefs}->exists($prefName) || (substr($prefName,0,2) eq 'sz' && $g{prefs}->{$prefName} eq '') ) {
+					$g{prefs}->set( $prefName, $hPrefDefaults{$prefName} );
+				}
+
+			}
 		}
+
+
+
+
 
 	## OSX
 	} elsif ($g{szOS} eq 'mac') {
@@ -551,7 +588,7 @@ sub PrepOSSpecificPrefDefaults {
 			if ( substr($prefName,0,2) eq 'sz' ) {
 				$hPrefDefaults{$prefName} = sprintf($hPrefDefaults_mac{$prefName}, $cmd, $logfile);
 			}
-			
+
 			$g{prefs}->set( $prefName, $hPrefDefaults{$prefName} );
 		}
 	}
@@ -993,7 +1030,7 @@ sub _pushSettings {
 	#determine the current log level, pass that in params..
 
 	#$params->{srvrpowerctrl_logLevel} = $hLogLevels{ $g{log}->level }->{logLevel};
-	
+
 	$params->{sbsservername} = Plugins::SrvrPowerCtrl::Util::GetSCName();
 
 	#Pass the log levels array iln params..

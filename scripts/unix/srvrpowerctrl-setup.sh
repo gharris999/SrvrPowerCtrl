@@ -180,22 +180,43 @@ fixup_sudoers(){
 	fi
 
 	#Tack on permission for the lms user to run these commands sans password prompt..
-	for CMD in "$(which shutdown)*" "$(which pm-suspend)*" "$(which pm-hibernate)*" "$(which pm-powersave)*" "$(which crontab) -l"
-	do
-		RE="${SLIMUSERNAME}.*${CMD}"
-		FOUNDSTR=$(grep -E "$RE" "$SUDOERS")
+	if [ $(systemctl 2>&1 | grep -c '\-\.mount') -gt 0 ]; then	
+		SYSTEMCTL="$(which systemctl)"
+		for CMD in "${SYSTEMCTL} poweroff" "${SYSTEMCTL} suspend" "${SYSTEMCTL} hibernate" "${SYSTEMCTL} hibrid-sleep" "${SYSTEMCTL} reboot" "$(which crontab) -l"
+		do
+			RE="${SLIMUSERNAME}.*${CMD}"
+			FOUNDSTR=$(grep -E "$RE" "$SUDOERS")
 
-		if [ -z "$FOUNDSTR" ]; then
-			spc_disp_message "Modifying ${SUDOERS} to allow user ${SLIMUSERNAME} to run ${CMD}.."
-			#ALL hosts vs specific host..
-			echo "${SLIMUSERNAME} ALL = NOPASSWD: ${CMD}" >>$SUDOERS
-			MADECHANGES=1
-		else
-			spc_disp_message "User ${SLIMUSERNAME} already has permissions to run ${CMD}.."
-		fi
+			if [ -z "$FOUNDSTR" ]; then
+				spc_disp_message "Modifying ${SUDOERS} to allow user ${SLIMUSERNAME} to run ${CMD}.."
+				#ALL hosts vs specific host..
+				echo "${SLIMUSERNAME} ALL = NOPASSWD: ${CMD}" >>$SUDOERS
+				MADECHANGES=1
+			else
+				spc_disp_message "User ${SLIMUSERNAME} already has permissions to run ${CMD}.."
+			fi
 
-	done
+		done
+		
+	else
+		for CMD in "$(which shutdown)*" "$(which pm-suspend)*" "$(which pm-hibernate)*" "$(which pm-powersave)*" "$(which crontab) -l"
+		do
+			RE="${SLIMUSERNAME}.*${CMD}"
+			FOUNDSTR=$(grep -E "$RE" "$SUDOERS")
 
+			if [ -z "$FOUNDSTR" ]; then
+				spc_disp_message "Modifying ${SUDOERS} to allow user ${SLIMUSERNAME} to run ${CMD}.."
+				#ALL hosts vs specific host..
+				echo "${SLIMUSERNAME} ALL = NOPASSWD: ${CMD}" >>$SUDOERS
+				MADECHANGES=1
+			else
+				spc_disp_message "User ${SLIMUSERNAME} already has permissions to run ${CMD}.."
+			fi
+
+		done
+	fi
+	
+	
 	return 0
 }
 
