@@ -4,7 +4,7 @@
 #    hardware via SBS's web interface, your Squeezebox's IR remote
 #    or via a SBC / Touch / SqueezePlay.
 #
-#    Version 20120716.103808
+#    Version 20160501.145329
 #
 #    Copyright (C) 2008, 2009 Gordon Harris
 #
@@ -61,7 +61,7 @@ if ($^O =~ /^m?s?win/i) {		## Are we running windows?
 use vars qw(%g);
 
 %g = (
-	nAppVersion				=> 20120716.103808,											#version of this code..
+	nAppVersion				=> 20160501.145329,											#version of this code..
 	szAppPath				=> Plugins::SrvrPowerCtrl::Util::GetPluginPath(),			#Where the heck are we, anyway?
 	nSCVersion				=> Plugins::SrvrPowerCtrl::Util::GetSCVersion(),			#Version of SC/SBS/LMS.
 	szSCUser				=> Plugins::SrvrPowerCtrl::Util::GetSCUser(),				#User account we're running under.

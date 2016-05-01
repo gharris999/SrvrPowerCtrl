@@ -4,7 +4,7 @@
 #    hardware via SBS's web interface, your Squeezebox's IR remote
 #    or via a SBC / Touch / SqueezePlay.
 #
-#    Version 20120716.103808
+#    Version 20160501.145329
 #
 #    Copyright (C) 2008, 2009 Gordon Harris
 #
